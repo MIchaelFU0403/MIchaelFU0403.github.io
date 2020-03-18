@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://michaelfu0403.github.io/"/>
-  <updated>2020-03-18T13:10:57.282Z</updated>
+  <updated>2020-03-18T16:19:43.557Z</updated>
   <id>https://michaelfu0403.github.io/</id>
   
   <author>
@@ -21,12 +21,14 @@
     <link href="https://michaelfu0403.github.io/2020/03/18/The-first-blog-Hello-world/"/>
     <id>https://michaelfu0403.github.io/2020/03/18/The-first-blog-Hello-world/</id>
     <published>2020-03-18T01:44:28.000Z</published>
-    <updated>2020-03-18T13:10:57.282Z</updated>
+    <updated>2020-03-18T16:19:43.557Z</updated>
     
     <summary type="html">
     
     </summary>
     
+    
+      <category term="web" scheme="https://MIchaelFU0403.github.io/categories/web/"/>
     
     
       <category term="新手入门" scheme="https://MIchaelFU0403.github.io/tags/%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/"/>
