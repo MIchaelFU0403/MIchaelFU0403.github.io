@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Personal Blog</title>
   
-  
+  <subtitle>author: Michael fu</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://michaelfu0403.github.io/"/>
