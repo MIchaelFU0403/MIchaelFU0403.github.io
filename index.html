@@ -252,11 +252,11 @@
             </span>
 
           
-            <span id="/2020/03/18/The-first-blog-Hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="The first blog : Hello world" title="阅读次数">
+            <span id="/2020/03/18/The-first-blog-Hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="The first blog : Hello world" title="阅读热度">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
-              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="post-meta-item-text">阅读热度：</span>
               <span class="leancloud-visitors-count"></span>
               <span>℃</span>
             </span>
@@ -464,9 +464,14 @@
                 console.error('Failed to save visitor count', error);
               })
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
