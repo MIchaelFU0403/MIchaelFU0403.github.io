@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>Personal Blog</title>
   
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://michaelfu0403.github.io/"/>
   <updated>2020-03-18T01:44:28.252Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://michaelfu0403.github.io/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>Michael Fu</name>
     
   </author>
   
@@ -18,8 +18,8 @@
   
   <entry>
     <title>The first blog : Hello world</title>
-    <link href="http://yoursite.com/2020/03/18/The-first-blog-Hello-world/"/>
-    <id>http://yoursite.com/2020/03/18/The-first-blog-Hello-world/</id>
+    <link href="https://michaelfu0403.github.io/2020/03/18/The-first-blog-Hello-world/"/>
+    <id>https://michaelfu0403.github.io/2020/03/18/The-first-blog-Hello-world/</id>
     <published>2020-03-18T01:44:28.000Z</published>
     <updated>2020-03-18T01:44:28.252Z</updated>
     
