@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2020-03-18T01:44:28.252Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>The first blog : Hello world</title>
+    <link href="http://yoursite.com/2020/03/18/The-first-blog-Hello-world/"/>
+    <id>http://yoursite.com/2020/03/18/The-first-blog-Hello-world/</id>
+    <published>2020-03-18T01:44:28.000Z</published>
+    <updated>2020-03-18T01:44:28.252Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
