@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>The first blog : Hello world</title>
-    <url>/2020/03/18/The-first-blog-Hello-world/</url>
-    <content><![CDATA[<p><em>PO 2首诗</em></p>
-<p>#红瓦青垣</p>
-<p>夏晴，看桃霞卷云。<br>冬夜，品月雪凉风。<br>翠雨骤雨，垣墙默立。<br>云卷云舒，楼影悦动。<br>漫步楼宇庭轩，<br>壮志将栏杆拍遍。<br>逡巡杏林石原，<br>豁达挟飞仙遨游。<br>凭依墙落，温热岁月。<br>五十载过客学子思绪万千，<br>白驹过日夜军号嘹亮不绝。<br>古人力览卷帙哲思丘谷，<br>今士潜心文理考究人生。</p>
-<hr>
-<p>#桥于江上，冷月夜江</p>
-<p>日，至江北寻好友相聚。<br>夜，独步于江浔，上桥。<br>江风透骨，风衣难挡。<br>隔岸灯影，明且长。<br>浓云轻笼长桥，缀月光。<br>眼迷蒙，思向远方。<br>青石板，黄土窑。黄河水，同有桥。<br>暮秋过，叶微黄。冬月至，雪苍茫。<br>隔水望，千帆远。一朝别，家命难忘。<br>冷夜月江，氤氲了日期，切盼归乡。</p>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>The first blog : Hello world</title>
+      <link href="/2020/03/18/The-first-blog-Hello-world/"/>
+      <url>/2020/03/18/The-first-blog-Hello-world/</url>
+      
+        <content type="html"><![CDATA[<p><em>PO 2首诗</em></p><p>#红瓦青垣</p><p>夏晴，看桃霞卷云。<br>冬夜，品月雪凉风。<br>翠雨骤雨，垣墙默立。<br>云卷云舒，楼影悦动。<br>漫步楼宇庭轩，<br>壮志将栏杆拍遍。<br>逡巡杏林石原，<br>豁达挟飞仙遨游。<br>凭依墙落，温热岁月。<br>五十载过客学子思绪万千，<br>白驹过日夜军号嘹亮不绝。<br>古人力览卷帙哲思丘谷，<br>今士潜心文理考究人生。</p><hr><p>#桥于江上，冷月夜江</p><p>日，至江北寻好友相聚。<br>夜，独步于江浔，上桥。<br>江风透骨，风衣难挡。<br>隔岸灯影，明且长。<br>浓云轻笼长桥，缀月光。<br>眼迷蒙，思向远方。<br>青石板，黄土窑。黄河水，同有桥。<br>暮秋过，叶微黄。冬月至，雪苍茫。<br>隔水望，千帆远。一朝别，家命难忘。<br>冷夜月江，氤氲了日期，切盼归乡。</p>]]></content>
+      
+      
       <categories>
-        <category>web</category>
+          
+          <category> web </category>
+          
       </categories>
-      <tags>
-        <tag>新手入门</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> 新手入门 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
