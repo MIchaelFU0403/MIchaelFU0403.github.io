@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>GRE 3000 List 1-10</title>
+    <url>/2020/04/19/GRE3000/</url>
+    <content><![CDATA[<h1><span id="day-1list-1-10">DAY 1:List 1-10</span></h1><a id="more"></a>
+<h2><span id="list-1">List 1:</span></h2><h3><span id="0">0</span></h3><p>ad-lib</p>
+<h3><span id="1">1</span></h3><p>abjure<br>ad hoc<br>adapt<br>adventitious<br>affinity<br>aggrandize<br>aggravate<br>allay<br>ally<br>amble</p>
+<h3><span id="2">2</span></h3><p>accolade<br>adhere<br>advert<br>agitate<br>agonize<br>alacrity<br>amenity<br>amity</p>
+<h2><span id="list-2">List 2:</span></h2><h3><span id="0">0</span></h3><p>approbation<br>apt<br>awe</p>
+<h3><span id="1">1</span></h3><p>annul<br>antagonize<br>apposite<br>appreciable<br>apropos<br>aspect<br>assiduous<br>astute<br>aver<br>awry<br>bait<br>bane<br>banish</p>
+<h3><span id="2">2</span></h3><p>anodyne<br>antic<br>apostasy<br>apprise<br>arduous<br>asperity<br>assertive<br>atone<br>atrocious<br>attenuate<br>axiomatic<br>babble<br>bale<br>baleful<br>balk<br>balky</p>
+<h2><span id="list-3">List 3:</span></h2><h3><span id="0">0</span></h3><p>barbarous<br>burnish<br>byzantine<br>cache</p>
+<h3><span id="1">1</span></h3><p>beguile<br>belie<br>benign<br>berate<br>beseech<br>bigot<br>bland<br>blasé<br>blast<br>blatant<br>blemish<br>blight<br>bliss<br>blithe<br>blunt<br>blurt<br>bluster<br>boorish<br>bootless<br>bound<br>bracing<br>breach<br>browbeat<br>bumptious<br>buoy<br>buoyant<br>burlesque<br>cachet<br>cacophony</p>
+<h3><span id="2">2</span></h3><p>barb<br>bathetic<br>belabor<br>beleaguer<br>besmirch<br>blazon<br>boggle<br>boisterous<br>brash<br>brassy<br>bravado<br>bravura<br>brazen<br>brisk<br>bristle<br>brittle<br>broach<br>bromide<br>bruit<br>budge<br>bulge<br>bungle<br>cajole<br>calcify<br>callous<br>calumniate<br>catharsis<br>canard<br>candor</p>
+<h2><span id="list-4">List 4:</span></h2><h3><span id="1">1</span></h3><p>capitulate<br>caprice<br>cast<br>castigate<br>concomitant<br>chasm<br>cherubic</p>
+<p>chromatic<br>chronic<br>circumspect<br>circumvent</p>
+<p>civility<br>clarion<br>clasp<br>clement<br>cliché<br>clog<br>cordial<br>coagulate<br>coerce<br>coeval<br>cognizant<br>collude<br>colossal<br>coma<br>comity<br>commend<br>commitment<br>commonsensical</p>
+<p>complacency<br>complaisance<br>compliant</p>
+<h3><span id="2">2</span></h3><p>canvass</p>
+<h2><span id="list-5">List 5:</span></h2><h3><span id="0">0</span></h3><h3><span id="1">1</span></h3><h3><span id="2">2</span></h3><h2><span id="list-6">List 6:</span></h2><h3><span id="0">0</span></h3><h3><span id="1">1</span></h3><h3><span id="2">2</span></h3><h2><span id="list-7">List 7:</span></h2><h3><span id="0">0</span></h3><h3><span id="1">1</span></h3><h3><span id="2">2</span></h3><h2><span id="list-8">List 8:</span></h2><h3><span id="0">0</span></h3><h3><span id="1">1</span></h3><h3><span id="2">2</span></h3><h2><span id="list-9">List 9:</span></h2><h3><span id="0">0</span></h3><h3><span id="1">1</span></h3><h3><span id="2">2</span></h3><h2><span id="list-10">List 10:</span></h2><h3><span id="0">0</span></h3><h3><span id="1">1</span></h3><h3><span id="2">2</span></h3>]]></content>
+      <categories>
+        <category>English</category>
+      </categories>
+      <tags>
+        <tag>GRE</tag>
+        <tag>English</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Get to know Markdown</title>
     <url>/2020/04/18/markdown%20grammar/</url>
-    <content><![CDATA[<!-- toc -->
+    <content><![CDATA[<h1><span id="welcome-to-markdown">Welcome to Markdown</span></h1><h1><span id="第一次学习markdown总结一些常用的方法">第一次学习Markdown，总结一些常用的方法。</span></h1><a id="more"></a>
+
+<!-- toc -->
 
 <ul>
-<li><a href="#welcome-to-markdown">Welcome to Markdown</a><ul>
 <li><a href="#introducing-markdown">Introducing Markdown</a></li>
 <li><a href="#tutorial">Tutorial</a><ul>
 <li><a href="#1-headings"><strong>1. Headings</strong></a></li>
@@ -37,14 +65,12 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <!-- tocstop -->
 
-<h1><span id="welcome-to-markdown">Welcome to Markdown</span></h1><h2><span id="introducing-markdown">Introducing Markdown</span></h2><blockquote>
+<h1><span id="introducing-markdown">Introducing Markdown</span></h1><blockquote>
 <p>Markdown is a plain text formatting syntax designed to be converted to HTML. Markdown is popularly used as format for readme files, … or in text editors for the quick creation of rich text documents.  - <a href="http://en.wikipedia.org/wiki/Markdown" target="_blank" rel="noopener">Wikipedia</a></p>
 </blockquote>
-<h2><span id="tutorial">Tutorial</span></h2><h3><span id="1-headings"><strong>1. Headings</strong></span></h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># h1</span><br><span class="line">## h2</span><br><span class="line">### h3</span><br><span class="line">#### h4</span><br><span class="line">##### h5</span><br><span class="line">###### h6</span><br><span class="line">####### h7      &#x2F;&#x2F; 错误代码</span><br><span class="line">######## h8     &#x2F;&#x2F; 错误代码</span><br><span class="line">######### h9    &#x2F;&#x2F; 错误代码</span><br><span class="line">########## h10  &#x2F;&#x2F; 错误代码</span><br></pre></td></tr></table></figure>
+<h1><span id="tutorial">Tutorial</span></h1><h3><span id="1-headings"><strong>1. Headings</strong></span></h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># h1</span><br><span class="line">## h2</span><br><span class="line">### h3</span><br><span class="line">#### h4</span><br><span class="line">##### h5</span><br><span class="line">###### h6</span><br><span class="line">####### h7      &#x2F;&#x2F; 错误代码</span><br><span class="line">######## h8     &#x2F;&#x2F; 错误代码</span><br><span class="line">######### h9    &#x2F;&#x2F; 错误代码</span><br><span class="line">########## h10  &#x2F;&#x2F; 错误代码</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">h1</span><br><span class="line">&#x3D;&#x3D;&#x3D;</span><br><span class="line">h2</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
@@ -163,7 +189,10 @@
 </ul>
 <!-- tocstop -->
 
-<h1><span id="po-2首诗"><em>PO 2首诗</em></span></h1><center>
+<h1><span id="po-2首诗"><em>PO 2首诗</em></span></h1><a id="more"></a>
+
+
+<center>
 
 <h3><span id="红瓦青垣">红瓦青垣</span></h3><p>夏晴，看桃霞卷云。<br>冬夜，品月雪凉风。<br>翠雨骤雨，垣墙默立。<br>云卷云舒，楼影悦动。<br>漫步楼宇庭轩，<br>壮志将栏杆拍遍。<br>逡巡杏林石原，<br>豁达挟飞仙遨游。<br>凭依墙落，温热岁月。<br>五十载过客学子思绪万千，<br>白驹过日夜军号嘹亮不绝。<br>古人力览卷帙哲思丘谷，<br>今士潜心文理考究人生。</p>
 <hr>
