@@ -2,6 +2,120 @@
 <search>
   <entry>
     <title>软件架构技术课堂笔记1</title>
+    <url>/2020/04/23/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%8A%80%E6%9C%AF%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B02/</url>
+    <content><![CDATA[<h3><span id="软件架构技术课堂笔记2">软件架构技术课堂笔记2</span></h3><p>&lt;会存在很多问题，日后的学习会进行更正&gt;</p>
+<h3><span id="spring-框架">Spring 框架：</span></h3><blockquote>
+<p>Spring是分层的javaEE应用一站式轻量级开源框架，由Rod Johnson创建；Spring是为简了化企业级系统开发而诞生的；使用Spring，可以用简单的JavaBeans来实现那些EJB的功能。<br>如果一个系统不需要分布式计算或声明式事务支持，EJB并不是最好的选择；Spring使用基本的JavaBean来完成以前只可能由EJB完成的事情。<br>Spring的核心是控制反转（IoC）和面向切面编程（AOP）。提供了展现层SpringMVC、持久层SpringJDBC以及业务层是否管理等众多企业级应用技术。Spring IoC和AOP能让代码很好的分层和解耦，从而提高可维护性和可扩展性，便于测试</p>
+</blockquote>
+<a id="more"></a>
+<h3><span id="spring-模块概述">Spring 模块概述：</span></h3><h3><span id="核心容器beanfactory">核心容器(BeanFactory)</span></h3><blockquote>
+<p>核心容器提供 Spring 框架的基本功能(Spring Core)。<br>核心容器的主要组件是 <strong>BeanFactory</strong> ，它是工厂模式的实现，作为<strong>IoC容器</strong>管理Bean。<br><strong>BeanFactory</strong> 使用<strong>控制反转（IOC） 模式</strong>将应用程序的配置和依赖性规范与实际的应用程序代码分开，将类和类之间的依赖从代码中脱离出来，用配置的方式进行依赖关系描述，由IoC容器负责依赖类之间的创建、拼接、管理、获取等工作。 BeanFactory接口是Spring框架的核心接口，实现了容器的许多核心功能。<br><strong>相关jar包：spring-core.jar，spring-beans.jar</strong></p>
+</blockquote>
+<hr>
+<h4><span id="上下文applicationcontext">上下文(ApplicationContext)：</span></h4><p>Spring上下文是一个配置文件，向 Spring框架提供上下文信息。<br><strong>ApplicationContext</strong>是Context模块的核心接口。可用于扫描<br><strong>相关jar包：spring-context.jar</strong></p>
+<hr>
+<h4><span id="spring-ioc容器">Spring IoC容器：</span></h4><blockquote>
+<p><strong>BeanFactory是Spring框架最核心接口</strong>，BeanFactory使得管理不同类型的Java对象成为可能，应用上下文（ApplicationContext）建立在BeanFactory基础上，提供了更多面向应用的功能。一般称BeanFactory为<strong>IoC容器</strong>，称ApplicationContext为<strong>应用上下文（有时也称为Spring容器）</strong>。<br><strong>从用途上划分</strong>，BeanFactory是Spring框架的基础设施。而其子类ApplicationContext由BeanFactory派生而来，提供了更多面向实际应用的功能。<br>创建ApplicationContext对象，代表一个Spring控制反转容器启动。</p>
+</blockquote>
+<hr>
+<h4><span id="applicationcontext的几种常用实现">ApplicationContext的几种常用实现：</span></h4><ol>
+<li><strong>ClassPathXmlApplicationContext</strong>：从类路径下的一个或多个XML文件中加载上下文定义，即加载Bean定义的信息。把应用上下文的定义文件作为类资源。（对应的XML名称）</li>
+<li><strong>FileSystemXmlApplicationContext</strong>：从文件系统中的一个或多个XMl文件中加载上下文定义，即Bean定义的信息。(绝对路径)</li>
+<li><strong>AnnotationConfigApplicationContext</strong>:从一个或多个基于Java的配置类中加载Spring应用上下文。</li>
+</ol>
+<hr>
+<h4><span id="spring-ioc容器启动实例化">Spring IoC容器启动（实例化）</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ApplicationContext context &#x3D; new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);  &#x2F;&#x2F;applicationContext为对应配置文件的名字。子类实现父类接口</span><br></pre></td></tr></table></figure>
+<hr>
+<h3><span id="spring容器-bean配置-bean实现类及应用程序四者关系">Spring容器、Bean配置、Bean实现类及应用程序四者关系</span></h3><p><img src="/images/static/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/%E6%9E%B6%E6%9E%842_1.png" alt="四者关系"></p>
+<ol>
+<li><strong>Bean.XML中记录Bean的实现及依赖关系</strong></li>
+<li>Spring容器根据各种形式的Bean配置信息在<strong>容器内部建立Bean定义注册表，根据注册表加载、利用Java语言的反射功能实例化实例化Bean。</strong></li>
+<li>并建立Bean和Bean的<strong>依赖关系</strong>。</li>
+<li>最后将准备就绪的Bean放到<strong>Bean缓存池</strong>中，<strong>供外层应用调用</strong>。</li>
+<li>Spring管理的Java对象称为<strong>“beans”。</strong></li>
+</ol>
+<p>Spring装配Bean前先要创建XML文件。</p>
+<ul>
+<li><p>applicationContext.xml 文件中要有<strong>官方给出的bean详细配置</strong></p>
+</li>
+<li><p>除此之外，这里在用到注解时，也要通过<strong>context告知spring容器在创建容器对象时要扫描的包。</strong></p>
+<p><img src="/images/static/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/%E6%9E%B6%E6%9E%842_2.png" alt="四者关系"></p>
+</li>
+</ul>
+<hr>
+<h3><span id="spring的依赖注入di的具体流程">Spring的依赖注入DI的具体流程：</span></h3><ol>
+<li>首先先在service层中建立一个接口叫AccountService</li>
+<li>在同路径下建立impl （implement类）AccountServiceImpl去实现AccountService接口，并重写AccountService中的方法。</li>
+<li>在src/com的路径下建立XML配置文件 bean.xml：进行bean的配置信息设置，用于在AccountServiceTest测试类中实现对象的实例化。<br>代码：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;bean id&#x3D;&quot;accountService&quot; </span><br><span class="line">class&#x3D;&quot;com.service.impl.AccountServiceImpl&quot;&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br></pre></td></tr></table></figure></li>
+<li>AccountServiceTest中首先先实例化spring容器AccountServiceTest。之后<br>通过ApplicationContext的getBean方法获取一定名字的bean。通过强转或字节码的形式实例化对象。<br>代码：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ApplicationContext ac &#x3D; new ClassPathXmlApplicationContext(&quot;bean.xml&quot;);</span><br><span class="line">AccountService as &#x3D; ac.getBean(&quot;accountService&quot;, AccountService.class);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h3><span id="spring中的依赖注入di可以注入的类型">Spring中的依赖注入(DI)可以注入的类型：</span></h3><p>1.基本类和String<br>2.其他bean类型(必须在注解文件中或者注解配置过的bean)：<br>//例如date类型： 用ref将date类的实例注入到accountService中，其他同上节课,value=“要注入的值”</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;bean id&#x3D;&quot;accountService1&quot; class&#x3D;&quot;com.service.impl.AccountService_1&quot;&gt;  &lt;!--class为类的位置--&gt;</span><br><span class="line">    &lt;constructor-arg name&#x3D;&quot;birthday&quot; ref&#x3D;&quot;now&quot;&gt;&lt;&#x2F;constructor-arg&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br><span class="line">&lt;bean id&#x3D;&quot;now&quot; class&#x3D;&quot;java.util.Date&quot;&#x2F;&gt; &lt;!-- now  &#x3D;  new Date() --&gt;</span><br></pre></td></tr></table></figure>
+<p>3.复杂类型(集合类型)<br>复杂类型注入：<br>    1. 标签：list array set(父集标签：list array set。子集标签：value)<br>    2.  map示例：</p>
+<pre><code>&lt;property name=&quot;myMap&quot;&gt;
+    &lt;map&gt;
+     &lt;entry key=&quot;testA&quot; value=&quot;aaa&quot;/&gt;
+        &lt;entry key=&quot;testB&quot;&gt;
+            &lt;value&gt;bbb&lt;/value&gt;
+        &lt;/entry&gt;
+     &lt;/map&gt;
+ &lt;/property&gt;</code></pre><p>3.Properties示例： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;property name&#x3D;&quot;myProps&quot;&gt; &lt;props&gt;</span><br><span class="line">        &lt;prop key&#x3D;&quot;testC&quot;&gt;ccc&lt;&#x2F;prop&gt;</span><br><span class="line">        &lt;prop key&#x3D;&quot;testD&quot;&gt;ddd&lt;&#x2F;prop&gt; &lt;&#x2F;props&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>优势：结构相同的，标签可以进行互换</li>
+</ol>
+<hr>
+<h3><span id="三种依赖注入方式">三种依赖注入方式：</span></h3><p>xml：</p>
+<ul>
+<li>使用构造函数<br>标签<code>constructor-arg</code></li>
+</ul>
+<p><strong>构造函数注入</strong>是除<strong>属性注入</strong>之外的另一种常用注入方式，他保证一些必要的属性在Bean实例化时就得到设置，并<strong>确保Bean实例在实例化</strong>后就可以使用。<br><strong>使用构造函数注入的前提是Bean必须提供带参的构造函数</strong>。    </p>
+<hr>
+<ul>
+<li>set方法(属性注入):</li>
+</ul>
+<ol>
+<li><p>实际应用中最常采用的注入方式。<br>通过SetXxx（）方法注入Bean的属性值或依赖对象，属性注入要求Bean提供一个默认的构造函数，并为需要注入的属性提供对应的Setter方法。</p>
+<ol start="2">
+<li>涉及的标签：property</li>
+<li>出现的位置：bean标签内部</li>
+<li>标签的属性<pre><code>*   name:用于指定注入时所调用的set方法名称
+*  value:用于提供基本类型和String类型的数据
+*  ref：用于指定其他bean类型数据</code></pre></li>
+<li>寻找类中set方法:<br>set/get   set - 属性名称 :将属性名称的开头字母转换成小写</li>
+<li>优势：创建对象时没有明确的限制，可直接赋值设置也可以使用默认的构造方法。</li>
+<li>弊端： 如果有某成员必须有值，则获取对象时可能set方法没有执行。<br>例子：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;bean id &#x3D;&quot;accountService2&quot; class&#x3D;&quot;com.service.impl.AccountService_2&quot;&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;name&quot; value&#x3D;&quot;李四&quot;&gt;&lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;age&quot; value &#x3D;&quot;20&quot;&#x2F;&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;birthday&quot; ref&#x3D;&quot;now&quot;&#x2F;&gt; </span><br><span class="line">    &lt;&#x2F;bean&gt;</span><br></pre></td></tr></table></figure>
+注意：setXX要与name 一致</li>
+</ol>
+</li>
+</ol>
+<hr>
+<ul>
+<li>注解：根据提供的注解.</li>
+</ul>
+<p><strong>(Component,   Controller,   Service,   Repository)</strong></p>
+<ul>
+<li>作用：和xml中配置bean作用功能一样</li>
+<li>属性：value—和bean中id的作用一样，标识作用</li>
+<li>位置：类上(接口的实现类上)  如下所示： </li>
+</ul>
+<p><code>@Service(&quot;accountService&quot;)</code><br><code>//@Component(&quot;accountService&quot;)</code><br><code>public class AccountService_4 implements AccountService{}</code></p>
+<p>用注解的方式时：要在根目录的xml 文件中加入，用于扫描</p>
+<p><code>&lt;!--  告知spring容器在创建容器对象时要扫描的包 --&gt;</code><br><code>&lt;context:component-scan base-package=&quot;com&quot;/&gt;</code></p>
+<p>PS: XML的标签可以是单个&lt;&gt;，也可以有&lt;/&gt;配对</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>学校</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>软件架构技术课堂笔记1</title>
     <url>/2020/04/21/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%8A%80%E6%9C%AF%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B01%20/</url>
     <content><![CDATA[<h3><span id="软件架构技术课堂笔记1">软件架构技术课堂笔记1</span></h3><p>&lt;会存在很多问题，日后的学习会进行更正&gt;</p>
 <h3><span id="什么是架构">什么是架构?</span></h3><p><strong>架构</strong> 是一系列相关的抽象模式，用于指导大型软件系统各方面的设计。是软件系统从整体到部分的最高层次的抽象划分(系统设计规划图）</p>
