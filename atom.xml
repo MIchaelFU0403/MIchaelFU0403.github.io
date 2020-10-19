@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://michaelfu0403.github.io/"/>
-  <updated>2020-04-23T14:39:48.162Z</updated>
+  <updated>2020-10-19T04:38:05.890Z</updated>
   <id>https://michaelfu0403.github.io/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《移动边缘计算》阅读笔记</title>
+    <link href="https://michaelfu0403.github.io/2020/10/19/%E7%A7%BB%E5%8A%A8%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/"/>
+    <id>https://michaelfu0403.github.io/2020/10/19/%E7%A7%BB%E5%8A%A8%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/</id>
+    <published>2020-10-19T07:24:28.000Z</published>
+    <updated>2020-10-19T04:38:05.890Z</updated>
+    
+    <content type="html"><![CDATA[<h1><span id="移动边缘计算">移动边缘计算</span></h1><!-- toc --><ul><li><a href="#前言">前言</a></li><li><a href="#第1章-基本概述">第1章 基本概述</a><ul><li><a href="#11-移动边缘计算的由来">1.1 移动边缘计算的由来</a><ul><li><a href="#提出的原因">提出的原因：</a></li><li><a href="#边缘计算架构">边缘计算架构：</a></li><li><a href="#移动边缘计算的特点">移动边缘计算的特点：</a></li></ul></li><li><a href="#12-相似解决方案">1.2 相似解决方案</a><ul><li><a href="#相似解决方案">相似解决方案：</a><ul><li><a href="#121移动云计算">1.2.1.移动云计算：</a></li><li><a href="#122雾计算">1.2.2.雾计算：</a></li><li><a href="#123微云">1.2.3.微云：</a></li><li><a href="#124移动边缘技术">1.2.4.移动边缘技术：</a></li></ul></li></ul></li><li><a href="#13-移动边缘计算与5g">1.3 移动边缘计算与5G</a></li><li><a href="#14-研究问题划分">1.4 研究问题划分</a></li></ul></li><li><a href="#第2章-关键技术">第2章 关键技术</a></li><li><a href="#第3章-典型应用场景">第3章 典型应用场景</a></li><li><a href="#第4章-工具与实验平台">第4章 工具与实验平台</a></li><li><a href="#第5章-未来挑战">第5章 未来挑战</a></li></ul><!-- tocstop --><h2><span id="前言">前言</span></h2><p>终端设备访问云计算数据中心为用户提供服务——增加了<u>网络负荷和数据传输时延</u></p><p>移动边缘计算——利用无线接入网络<u>就近</u>提供移动用户IT所需要的<u>服务和计算功能</u>，创造一个高性能，<u>低延迟</u>与<u>高带宽</u>的服务环境。</p><a id="more"></a><h2><span id="第1章-基本概述">第1章 基本概述</span></h2><h3><span id="11-移动边缘计算的由来">1.1 移动边缘计算的由来</span></h3><h4><span id="提出的原因">提出的原因：</span></h4><ol><li><p>所有的业务部署到云计算中心，造成<u>网络负荷</u>和较<u>长的网络延时</u>，使网络的<u>带宽</u>和<u>时延</u>等性能要求更高。</p></li><li><p><u>移动终端</u>计算、存储及功耗十分有限，需要<u>将高复杂度，高能耗的计算任务</u>迁移至<u>云计算中心</u>的服务器端去完成，<u>降低移动终端的能耗</u>。但数据的传输计算任务的迁移增加网络负荷，增加传输时延。</p></li></ol><p>根据ETSI的定义，<strong><u>移动边缘计算</u></strong>即在距离用户移动终端<strong><u>最近的无线接入网</u></strong>内提供<u>信息技术服务环境和云计算能力</u>，旨在进一步减小延迟/时延、提高网络运营效率、提高业务分发/传送能力、优化/改善终端用户体验。<strong>移动边缘计算</strong>可以被视为运行于<strong>移动网络边缘的云服务器</strong>，用以执行传统网络基础设施不能实现的特定任务。移动边缘计算是<strong><u>信息技术</u></strong>和<strong><u>通信网络</u></strong>融合的产物。</p><img src="pictures/a-1.1.jpg" alt="a-1.1" style="zoom:50%;"><h4><span id="边缘计算架构">边缘计算架构：</span></h4><p>移动边缘计算包括3个部分： <strong>边缘设备，边缘云和远端云</strong>（大规模云计算中心、大云）。</p><p><strong>边缘设备</strong>：可连接到网络</p><p><strong>边缘云</strong>：部署在移动基站上的小规模云计算中心。功能：流量控制（转发和过滤）管控移动边缘服务和应用。 </p><p><u>边缘设备处理能力不足，可通过无线网络将计算密集型和海量数据迁移到边缘云进行处理。边缘云处不能满足边缘设备请求，可通过无线网络将部分任务迁移到远端云进行处理。</u></p><h4><span id="移动边缘计算的特点">移动边缘计算的特点：</span></h4><p>隔离性：本地的，与<u>网络其他部分隔离运行</u>，机器通信安全性高。</p><p>临近性：<u>靠近信息源</u>（移动终端），可直接访问设备，利于捕捉分析大数据信息。</p><p>低时延性：边缘服务在靠近终端的<u>边缘服务器</u>上运行，时延降低，用户体验性好，<u>减少网络拥塞。</u></p><p>位置感知性：WIFI或蜂窝网络，都可使用低等级指令<u>确定连接设备位置。</u></p><p>网络上下文感知性：感知<u>实时网络数据</u>，统计分析用户消费行为和移动宽带使用量。</p><h3><span id="12-相似解决方案">1.2 相似解决方案</span></h3><p>移动互联网与物联网应用发展了多个相似的解决方案： 移动边缘计算(MEC)，移动云计算（mobile cloud computing MCC），雾计算（fog computing），微云（cloudlet）。</p><p>移动边缘计算(MEC)：边缘服务器和蜂窝基站能协同工作。边缘服务器可单独运行，也可以与远端云数据中心协同运行。</p><h4><span id="相似解决方案">相似解决方案：</span></h4><img src=" pictures/a-1.2.jpg" alt="a-1.2" style="zoom:50%;"><h5><span id="121移动云计算">1.2.1.移动云计算：</span></h5><h5><span id="122雾计算">1.2.2.雾计算：</span></h5><h5><span id="123微云">1.2.3.微云：</span></h5><h5><span id="124移动边缘技术">1.2.4.移动边缘技术：</span></h5><h3><span id="13-移动边缘计算与5g">1.3 移动边缘计算与5G</span></h3><h3><span id="14-研究问题划分">1.4 研究问题划分</span></h3><h2><span id="第2章-关键技术">第2章 关键技术</span></h2><h2><span id="第3章-典型应用场景">第3章 典型应用场景</span></h2><h2><span id="第4章-工具与实验平台">第4章 工具与实验平台</span></h2><h2><span id="第5章-未来挑战">第5章 未来挑战</span></h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;移动边缘计算&quot;&gt;&lt;a href=&quot;#移动边缘计算&quot; class=&quot;headerlink&quot; title=&quot;移动边缘计算&quot;&gt;&lt;/a&gt;移动边缘计算&lt;/h1&gt;&lt;!-- toc --&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#前言&quot;&gt;前言&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#第1章-基本概述&quot;&gt;第1章 基本概述&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#11-移动边缘计算的由来&quot;&gt;1.1 移动边缘计算的由来&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#提出的原因&quot;&gt;提出的原因：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#边缘计算架构&quot;&gt;边缘计算架构：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#移动边缘计算的特点&quot;&gt;移动边缘计算的特点：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#12-相似解决方案&quot;&gt;1.2 相似解决方案&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#相似解决方案&quot;&gt;相似解决方案：&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#121移动云计算&quot;&gt;1.2.1.移动云计算：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#122雾计算&quot;&gt;1.2.2.雾计算：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#123微云&quot;&gt;1.2.3.微云：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#124移动边缘技术&quot;&gt;1.2.4.移动边缘技术：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#13-移动边缘计算与5g&quot;&gt;1.3 移动边缘计算与5G&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#14-研究问题划分&quot;&gt;1.4 研究问题划分&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#第2章-关键技术&quot;&gt;第2章 关键技术&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#第3章-典型应用场景&quot;&gt;第3章 典型应用场景&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#第4章-工具与实验平台&quot;&gt;第4章 工具与实验平台&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#第5章-未来挑战&quot;&gt;第5章 未来挑战&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- tocstop --&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;终端设备访问云计算数据中心为用户提供服务——增加了&lt;u&gt;网络负荷和数据传输时延&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;移动边缘计算——利用无线接入网络&lt;u&gt;就近&lt;/u&gt;提供移动用户IT所需要的&lt;u&gt;服务和计算功能&lt;/u&gt;，创造一个高性能，&lt;u&gt;低延迟&lt;/u&gt;与&lt;u&gt;高带宽&lt;/u&gt;的服务环境。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="边缘计算" scheme="https://MIchaelFU0403.github.io/categories/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/"/>
+    
+    
+      <category term="新手入门" scheme="https://MIchaelFU0403.github.io/tags/%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>软件架构技术课堂笔记2</title>
