@@ -1,6 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Mobile edge computing—A key technology towards 5G 白皮书阅读</title>
+    <url>/2020/10/23/Mobile%20edge%20computing%E2%80%94A%20key%20technology%20towards%205G/</url>
+    <content><![CDATA[<h1><span id></span></h1><h1><span id="mobile-edge-computinga-key-technology-towards-5g">Mobile edge computing—A key technology towards 5G</span></h1><p><a href="https://infotech.report/Resources/Whitepapers/f205849d-0109-4de3-8c47-be52f4e4fb27_etsi_wp11_mec_a_key_technology_towards_5g.pdf" target="_blank" rel="noopener">survey 地址</a></p>
+<h2><span id="introduction">Introduction</span></h2><p>本白皮书旨在介绍移动边缘计算的概念和相关的主要市场驱动因素，并讨论移动边缘计算的业务和技术优势。文中给出了一些可以从该技术中获益的服务场景示例和可能的部署场景。白皮书解释了什么是标准化的以及如何标准化,通过使用标准化的API，移动边缘计算技术朝着5G的创新方向发展。它概述了MEC行业规范小组正在制定的规范。</p>
+<a id="more"></a>
+
+
+
+<h2><span id="目录">目录</span></h2><!-- toc -->
+
+<ul>
+<li><a href="#intelligent-video-acceleration">Intelligent Video Acceleration</a></li>
+<li><a href="#connected-cars">Connected Cars</a></li>
+<li><a href="#internet-of-the-thing-gatewayiot">Internet of the thing Gateway（IoT）</a></li>
+<li><a href="#deployment-scenarios-部署方案">Deployment scenarios 部署方案</a></li>
+<li><a href="#etsi-industry-specification-groupon-mobile-edge-computing-行业规范">ETSI Industry Specification Groupon Mobile Edge Computing 行业规范</a></li>
+<li><a href="#proofs-of-concept-概念证明">Proofs of Concept 概念证明</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+<!-- tocstop -->
+
+<p>ETSI ISG MEC鼓励概念验证（PoC）来证明MEC实现的可行性。PoCs 将帮助建立对该技术的认识和信心，并开发一个多样化的开放式MEC生态系统。本白皮书描述了MEC PoC框架和积极参与的要求。</p>
+<p>运营商可以在价值链中重新定位自己，并重新定义个性化服务。他们可以利用自己的网络，并将其开放给授权的第三方（以安全的方式），向顶级（OTT）玩家和应用程序开发人员提供灵活、灵活和快速地向移动用户、企业和垂直部门部署创新应用程序和服务的能力。运营商将能够创造新的收入来源，通过开发提供增值的新型应用程序取悦客户，并开拓新的市场机会。此外，支持网络和服务参数更紧密集成的应用程序将提高服务体验和网络资源的利用率</p>
+<hr>
+<h2><span id="intelligent-video-acceleration">Intelligent Video Acceleration</span></h2><p>通过智能视频加速可以提高终端用户的体验质量（QoE）和无线网络资源的利用率。互联网媒体和<strong>文件传输目前通常通过TCP协议使用超文本传输协议（HTTP）</strong>进行流式传输或下载。可用容量可以在几秒钟内发生一个<strong>数量级的变化</strong>（由于无线信道条件的变化，设备进入/离开网络）。<u><strong>TCP可能无法快速适应无线接入网（RAN）中快速变化的条件</strong></u>。这可能导致宝贵的无线电资源利用不足，并导致次优用户体验。</p>
+<p>图4显示了一个智能视频加速服务场景的示例，它试图克服上述挑战。在这种情况下，驻留在MEC服务器中的无线电分析应用程序向视频服务器提供关于在无线电下行链路接口处估计可用的吞吐量的指示。该信息可用于协助TCP拥塞控制决策（例如，选择初始窗口大小、在拥塞避免阶段设置拥塞窗口的值、以及在“无线链路”上的条件恶化时调整拥塞窗口的大小）。该信息还可用于确保应用级编码与无线电下行链路处的估计容量相匹配。</p>
+<p>视频服务器可以使用该信息来帮助TCP拥塞控制决策（例如，通过确保应用级编码与无线电下行链路处的估计容量相匹配）。内容的启动时间和视频暂停次数都可以减少，从而提高视频质量和吞吐量。</p>
+<hr>
+<p>  在理论中，拥塞控制有两种实现方式：</p>
+<ul>
+<li><strong>端到端拥塞控制</strong>：在这种拥塞控制方法中，由发送数据的端系统自己来判断是否拥塞，然后调整传输速率。比如说发送的数据已经超时却还没有接收到确认报文，数据往返时延过高，接收到对同一个数据段的重复确认……都可以认为是网络拥塞的现象；若发送端检测到这种现象，就应该降低发送数据的速率，若没有，则可以慢慢提高速率；</li>
+<li><strong>网络辅助的拥塞控制</strong>：由网络中的路由器来告诉发送方，网络的拥塞情况。一般有两种方式：（1）路由器直接向发送端发送报文，告知网络拥塞情况；（2）路由器更改数据段中的某个标志，来提示网络中的拥塞情况，然后数据将这个标志携带到目的主机，再由目的主机根据这个标志，向发送端发送报文，告知拥塞情况（被包含在确认报文中）。</li>
+</ul>
+<hr>
+<h2><span id="connected-cars">Connected Cars</span></h2><p>联网车辆的数量正在迅速增长，并将在未来几年继续增长。车辆和路侧传感器与路边装置的通信旨在通过交换关键安全和,面向5G操作数据的移动边缘计算akey技术。该通信还可用于提供增值服务，如寻车器、停车位置和支持娱乐服务</p>
+<p>LTE可以显著加快连接车辆通信的部署。LTE蜂窝可以提供“超视距”的可视性，即在300-500米的车辆之间的直接通信范围之外。它还可以满足连接车辆通信的严格延迟要求，在某些情况下低于100毫秒。消息可以通过LTE实时分发，无需建立全国范围的数字短程通信（DSRC）网络。汽车可以利用其日益内置的LTE连接；在DSRC存在的部署中，LTE将能够对其进行补充</p>
+<hr>
+<p>其他理解：</p>
+<p><a href="https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&amp;dbname=CJFDLAST2019&amp;filename=DNZS201928116&amp;v=vQlR5l2T%25mmd2BFMHdcSHFpHRGjmH6Bojane8hRyUrOR3m%25mmd2F8vuDXGo1e31MIS1HLIRhmb" target="_blank" rel="noopener">https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&amp;dbname=CJFDLAST2019&amp;filename=DNZS201928116&amp;v=vQlR5l2T%25mmd2BFMHdcSHFpHRGjmH6Bojane8hRyUrOR3m%25mmd2F8vuDXGo1e31MIS1HLIRhmb</a></p>
+<hr>
+<h2><span id="internet-of-the-thing-gatewayiot">Internet of the thing Gateway（IoT）</span></h2><p>在电信网络上生成其他消息，并且需要网关来聚合消息并确保低延迟和安全性。由于某些连接的设备的性质，需要实时能力，并且需要一组传感器和设备才能提供高效服务。</p>
+<p>IoT设备通常在处理器和内存容量方面受到资源限制。需要汇总通过靠近设备的移动网络连接的各种IoT设备消息。这也提供了分析处理能力和低延迟响应时间。</p>
+<p>各种设备通过不同的连接形式进行连接，例如3G，LTE，Wi-Fi或其他无线电技术。通常，消息很小，经过加密，并且采用不同形式的协议。需要一个低延迟的聚合点来管理各种协议，消息分发和分析处理。MEC服务器提供了解决这些挑战的能力。</p>
+<p>移动边缘计算可用于远程连接和控制设备，分析并提供实时配置和分析。MEC支持将IoT服务聚合和分发到高度分布式的移动基站环境中，并使应用程序能够实时响应。这样可以减少数据的往返时间，并可以从核心网络和云中的应用程序中进行抽象。IoT应用程序可以在LTE基站站点上部署的MEC服务器上运行，以提供此功能。</p>
+<hr>
+<h2><span id="deployment-scenarios-部署方案">Deployment scenarios 部署方案</span></h2><p>移动边缘计算服务器可以部署在多个位置。</p>
+<p>例如LTE宏基站（eNodeB）站点， LTE macro base station</p>
+<p>3G无线电网络控制器（RNC）站点， 3G radio network controller</p>
+<p>多无线电接入技术（RAT）cell聚合站点，multi-radio access technology</p>
+<p>以及在聚合点（也可能在核心网络的边缘）。 Aggregation site</p>
+<p>Multi-RAT cell聚合站点可以位于企业内部（例如医院，大型公司总部）的室内，也可以位于特殊公共覆盖场景（例如体育场，购物中心）的室内/室外，以控制提供多个本地多RAT接入点房屋的无线电覆盖范围。通过此部署选项，可以从基站群集直接交付与本地相关的快速服务。部署MEC平台的位置可能取决于多种因素，包括可伸缩性，物理部署限制，性能标准（例如延迟）以及将公开哪些网络信息。请注意，某些MEC服务在某些部署选项中可能不可用/不适用。</p>
+<p>在特定MEC平台上部署MEC应用程序可能取决于特定MEC服务的可用性以及其他参数，例如等待时间要求，所需资源，特定VNF的可用性，可伸缩性，成本等。</p>
+<p>MEC将利用NFV基础设施。NFV平台可以专用于MEC或与其他网络功能或应用程序共享。MEC还将（尽可能）使用NFV管理和编排实体和接口。</p>
+<hr>
+<h2><span id="etsi-industry-specification-groupon-mobile-edge-computing-行业规范">ETSI Industry Specification Groupon Mobile Edge Computing 行业规范</span></h2><p>移动边缘计算（MEC）上的ETSI行业规范组（ISG）产生了规范的组规范，该规范将使能够在多供应商MEC环境中托管第三方应用程序。该小组于2014年12月成立，计划在2年内交付第一套规范。它规定了要求和参考体系结构，包括构成MEC解决方案关键要素的组件和功能元素。</p>
+<p>当第一个文档达到要求的成熟度时，将开始进行平台服务，API和接口的工作。MEC平台API将与应用程序无关，并且将在保证SLA的情况下在每台移动边缘服务器上顺利移植增值应用程序（请参见图7）</p>
+<p><img src="/images/static/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/survey/survey1.png" alt="survey1"></p>
+<p>除了技术工作外，在ISG MEC下还成立了一个行业支持工作组（IEG WG），其任务是推动行业中的Mobile Edge Computing并加速其发展。这将有助于为价值链中的所有参与者建立有利于可持续业务的有利市场条件。</p>
+<p>The IEG group is developingtwo Group Specifications: </p>
+<p>1.ETSI GS MEC-IEG 005 [2] Proof of ConceptFramework, specifyingthe process and criteria that a Proof of Concept demonstration must adhere to.This specification has already been published;</p>
+<p><u>概念框架证明，规定了概念证明演示必须遵守的过程和标准。此规范已经发布</u></p>
+<p>2.ETSI GS MEC-IEG 004 Service Scenarios, which presentsa number of examples of service scenarios, business and consumer benefits which can be enabled by Mobile Edge Computing</p>
+<p><u>其中提供了可通过移动边缘计算实现的许多服务方案，业务和消费者利益的示例</u></p>
+<p>ETSI ISG向ETSI的成员和非成员开放，以参与并为这项创新技术做出贡献。邀请行业参与者积极参与移动边缘计算并为之做出贡献，并参加PoC活动。</p>
+<hr>
+<h2><span id="proofs-of-concept-概念证明">Proofs of Concept 概念证明</span></h2><p>为了确保移动边缘计算的成功和广泛部署，不仅要有及时且高质量的规范，还有必要。至关重要的是验证正在制定的规范，并证明已满足用例。此外，必须证明MEC概念对于价值链中的所有主要利益相关者都是可行且有价值的，以便吸引尽可能广泛的受众。</p>
+<p>MEC概念验证的公开演示有助于建立对该技术的商业意识和信心，并有助于建立多样化，开放的MEC生态系统。</p>
+<p><strong>为了展示移动边缘计算的概念，ISG MEC开发了一种概念证明过程，在GS MEC-IEG005 [2]中进行了指定</strong></p>
+<p><strong>PoC提议可以由PoC团队提交，该团队由<u>至少一个移动网络运营商</u>，<u>至少一个基础设施供应商</u>和<u>至少一个内容或应用程序提供商</u>组成。</strong></p>
+<p><strong>GS MEC-IEG 005 [2]指定了概念验证演示必须遵循的过程和标准，才能被接受为MEC PoC。已经建立了一个Wiki网站<a href="http://mecwiki.etsi.org来协助PoC团队。该站点托管PoC项目建议模板和PoC主题列表，这些是需要PoC输入或反馈的特定区域。一个PoC项目可以解决一个或几个PoC主题。" target="_blank" rel="noopener">http://mecwiki.etsi.org来协助PoC团队。该站点托管PoC项目建议模板和PoC主题列表，这些是需要PoC输入或反馈的特定区域。一个PoC项目可以解决一个或几个PoC主题。</a></strong></p>
+<hr>
+<h2><span id="conclusion">Conclusion</span></h2><p>移动边缘计算支持创新的服务方案，可以确保增强的个人体验和优化的网络运营，以及开拓新的商机。本白皮书中描述了一些示例，以演示应用程序如何利用用户和对象的接近性以及网络和上下文信息来创造价值。移动边缘计算吸引了一个新的价值链和能源系统，所有参与者都可以从更紧密的协作中受益。移动运营商可以在新价值链中扮演关键角色，并吸引OTT服务提供商，开发人员和Internet参与者在新的尖端技术上进行创新，同时使上下文感知应用程序可以在移动订户附近运行。移动订户可以享受根据其需求和喜好量身定制的独特，真正可喜的个性化移动宽带体验。</p>
+<p>MEC基于虚拟化平台，是对NFV的补充，并与新兴的分布式云方法完全吻合。它被公认为是未来5G时代的关键技术，可以满足对超低延迟和刺激创新的苛刻要求。</p>
+<p>MEC技术由ETSI ISG MEC定义，该技术于2014年12月推出，旨在在2年内开发出第一套规范。可交付成果将包括服务方案，需求，体系结构和API规范，并辅以PoC框架规范和白皮书，旨在加速MEC技术在市场上的采用。</p>
+<p>MEC支持不同的部署选项，因为根据技术和业务要求，MEC服务器可以位于无线接入网中的不同位置。</p>
+<p>已经建立了MEC概念验证（PoC）程序来证明MEC实施的可行性。MEC PoC获得的结果和经验教训将反馈给ISG MEC规范活动</p>
+<p>MEC ISG正在开发基础，以实现开放的无线电接入网络，该网络可以在网络边缘托管第三方创新应用程序和内容。ISG向ETSI的成员和非成员开放，以参与这项创新技术并为此做出贡献，并参加PoC活动。</p>
+]]></content>
+      <categories>
+        <category>边缘计算</category>
+      </categories>
+      <tags>
+        <tag>Survey</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>移动边缘计算</title>
     <url>/2020/10/19/%E7%A7%BB%E5%8A%A8%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/</url>
     <content><![CDATA[<h1><span id="移动边缘计算-moblie-edge-computing">移动边缘计算 Moblie Edge Computing</span></h1><p>北京邮电大学出版社</p>
