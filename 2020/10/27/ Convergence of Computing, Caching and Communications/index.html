@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michaelfu0403.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="摘要随着智能设备的爆炸性增长和许多新应用的出现，流量已经成倍增长。由于backhaul回程链路上的沉重负担和较长的迟延，传统的集中式网络体系结构无法满足此类用户需求。因此，提出了将网络功能和内容带到网络边缘的新架构，即移动边缘计算和缓存。移动边缘网络在蜂窝网络的边缘提供云计算和缓存功能。 ​    1. 在本次调查中，我们对移动边缘网络的最新研究成果进行了详尽的回顾。我们首先概述移动边缘网络，包括">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Survey on Mobile Edge Networks: Convergence of Computing, Caching and Communications">
+<meta property="og:url" content="https://michaelfu0403.github.io/2020/10/27/%20Convergence%20of%20Computing,%20Caching%20and%20Communications/index.html">
+<meta property="og:site_name" content="Michael&#39;s Blog">
+<meta property="og:description" content="摘要随着智能设备的爆炸性增长和许多新应用的出现，流量已经成倍增长。由于backhaul回程链路上的沉重负担和较长的迟延，传统的集中式网络体系结构无法满足此类用户需求。因此，提出了将网络功能和内容带到网络边缘的新架构，即移动边缘计算和缓存。移动边缘网络在蜂窝网络的边缘提供云计算和缓存功能。 ​    1. 在本次调查中，我们对移动边缘网络的最新研究成果进行了详尽的回顾。我们首先概述移动边缘网络，包括">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://michaelfu0403.github.io/images/static/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/survey/%20Convergence%20of%20Computing,%20Caching%20and%20Communications1.png">
+<meta property="og:image" content="https://michaelfu0403.github.io/images/static/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/survey/%20Convergence%20of%20Computing,%20Caching%20and%20Communications4.png">
+<meta property="og:image" content="https://michaelfu0403.github.io/images/static/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/survey/%20Convergence%20of%20Computing,%20Caching%20and%20Communications2.png">
+<meta property="og:image" content="https://michaelfu0403.github.io/images/static/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/survey/%20Convergence%20of%20Computing,%20Caching%20and%20Communications3.png">
+<meta property="article:published_time" content="2020-10-27T05:07:11.000Z">
+<meta property="article:modified_time" content="2020-10-30T05:07:06.835Z">
+<meta property="article:author" content="Michael Fu">
+<meta property="article:tag" content="Survey">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://michaelfu0403.github.io/images/static/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/survey/%20Convergence%20of%20Computing,%20Caching%20and%20Communications1.png">
+
+<link rel="canonical" href="https://michaelfu0403.github.io/2020/10/27/%20Convergence%20of%20Computing,%20Caching%20and%20Communications/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>A Survey on Mobile Edge Networks: Convergence of Computing, Caching and Communications | Michael's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <a href="https://github.com/MIchaelFU0403" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Michael's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">author: Michael fu</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://michaelfu0403.github.io/2020/10/27/%20Convergence%20of%20Computing,%20Caching%20and%20Communications/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cute.png">
+      <meta itemprop="name" content="Michael Fu">
+      <meta itemprop="description" content="Jack of all trades and master of none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          A Survey on Mobile Edge Networks: Convergence of Computing, Caching and Communications
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-27 13:07:11" itemprop="dateCreated datePublished" datetime="2020-10-27T13:07:11+08:00">2020-10-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-30 13:07:06" itemprop="dateModified" datetime="2020-10-30T13:07:06+08:00">2020-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">边缘计算</span></a>
+                </span>
+            </span>
+
+          
+          <span id="/2020/10/27/%20Convergence%20of%20Computing,%20Caching%20and%20Communications/" class="post-meta-item leancloud_visitors" data-flag-title="A Survey on Mobile Edge Networks: Convergence of Computing, Caching and Communications" title="阅读热度">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-eye"></i>
+            </span>
+            <span class="post-meta-item-text">阅读热度：</span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/27/%20Convergence%20of%20Computing,%20Caching%20and%20Communications/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/27/%20Convergence%20of%20Computing,%20Caching%20and%20Communications/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2><span id="摘要">摘要</span></h2><p>随着智能设备的爆炸性增长和许多新应用的出现，流量已经成倍增长。由于<u>backhaul回程链路</u>上的沉重负担和较长的<u>迟延</u>，传统的集中式网络体系结构无法满足此类用户需求。因此，提出了将<u>网络功能和内容带到网络边缘</u>的新架构，即移动边缘计算和缓存。移动边缘网络在蜂窝网络的边缘提供云计算和缓存功能。</p>
+<p>​    1. <strong>在本次调查中，我们对移动边缘网络的最新研究成果进行了详尽的回顾。我们首先概述移动边缘网络，包括定义，体系结构和优点。</strong></p>
+<p>​    2. <strong>接下来，分别对网络边缘的计算，缓存和通信技术问题进行了全面概述。讨论了mobileedge网络的应用和用例。</strong></p>
+<p>​    3. <strong>随后，讨论了诸如云技术，SDN / NFV和智能设备等移动边缘网络的关键推动力。</strong></p>
+<p>​    4. <strong>最后，还提出了开放的研究挑战和未来的方向。</strong></p>
+<a id="more"></a>
+
+<h2><span id="目录">目录</span></h2><!-- toc -->
+
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#11-本文的主要贡献">1.1 本文的主要贡献</a></li>
+<li><a href="#12-本文的其余部分">1.2 本文的其余部分</a></li>
+</ul>
+</li>
+<li><a href="#overview-of-mobile-edge-networks">Overview of Mobile Edge Networks</a><ul>
+<li><a href="#a-what-is-mobile-edge-networks">A. What is Mobile Edge Networks？</a></li>
+<li><a href="#b-architecture-of-mobile-edge-networks">B. Architecture of Mobile Edge Networks</a><ul>
+<li><a href="#b-1-移动边缘计算">B-1 移动边缘计算</a><ul>
+<li><a href="#backhaul">Backhaul</a></li>
+<li><a href="#cdn">CDN</a></li>
+<li><a href="#cdn基础架构"><strong>CDN基础架构：</strong></a></li>
+</ul>
+</li>
+<li><a href="#b-2-雾计算">B-2 雾计算</a></li>
+<li><a href="#b-3-微云cloudlet">B-3 微云Cloudlet</a></li>
+<li><a href="#b-4-边缘缓存">B-4 边缘缓存</a></li>
+<li><a href="#b-5-总结对比">B-5 总结对比</a></li>
+</ul>
+</li>
+<li><a href="#c-advantages-of-mobile-edge-networks">C. Advantages of Mobile Edge Networks</a></li>
+</ul>
+</li>
+<li><a href="#computing-at-mobile-edge-networks">Computing at Mobile Edge Networks</a><ul>
+<li><a href="#3-a-objective">3-A Objective</a><ul>
+<li><a href="#1-能耗最小化">1) 能耗最小化</a></li>
+<li><a href="#2最大限度地提高容量">2)最大限度地提高容量</a></li>
+<li><a href="#3最小化时延">3)最小化时延</a></li>
+<li><a href="#知识小补充">知识小补充：</a></li>
+</ul>
+</li>
+<li><a href="#3-b-computation-offloading">3-B Computation Offloading</a><ul>
+<li><a href="#1-单用户情况-singlei-user-case">1） 单用户情况 singlei User Case</a></li>
+<li><a href="#2-多用户情况-multi-user-case">2） 多用户情况 Multi-user Case</a></li>
+<li><a href="#3-卸载到mec服务器-offloaded-to-mec-server">3） 卸载到MEC服务器   Offloaded to MEC Server</a></li>
+<li><a href="#4-卸载到设备-offloaded-to-devices">4） 卸载到设备 Offloaded to devices</a></li>
+<li><a href="#5-mobility-awareness-移动性意识">5） Mobility Awareness 移动性意识</a></li>
+</ul>
+</li>
+<li><a href="#3-c-cooperation-between-the-edge-and-the-core">3-C Cooperation between the edge and the core</a></li>
+<li><a href="#4-d-platforms">4-D Platforms</a></li>
+</ul>
+</li>
+<li><a href="#caching-at-mobile-edge-networks">Caching at Mobile Edge Networks</a><ul>
+<li><a href="#4-a-cashing-places-缓存的位置">4-A Cashing Places 缓存的位置</a><ul>
+<li><a href="#1-mbs-caching-mbs缓存">1) MBS Caching （MBS缓存）</a></li>
+<li><a href="#2-sbs-caching-sbs缓存">2) SBS Caching （SBS缓存）</a></li>
+<li><a href="#3-device-caching-设备缓存">3) Device Caching  （设备缓存）</a></li>
+</ul>
+</li>
+<li><a href="#4-b-content-popularity-内容热度">4-B. Content Popularity 内容热度</a><ul>
+<li><a href="#1-static-model-静态模型">1) Static Model 静态模型</a></li>
+<li><a href="#2-dynamic-model-动态模型">2) Dynamic Model  动态模型</a></li>
+</ul>
+</li>
+<li><a href="#4-c-caching-policies-and-algorithms-缓存策略和算法">4-C. Caching Policies and Algorithms  缓存策略和算法</a><ul>
+<li><a href="#1conventional-caching-policies-传统的缓存策略">1)Conventional Caching Policies   传统的缓存策略</a></li>
+<li><a href="#2-user-preference-based-policies-基于用户偏好的策略">2) User Preference Based Policies  基于用户偏好的策略</a></li>
+<li><a href="#3-learning-based-policies-基于学习的策略">3) Learning Based Policies  基于学习的策略</a></li>
+<li><a href="#4-non-cooperative-caching-非协作缓存">4) Non-Cooperative Caching  非协作缓存</a></li>
+<li><a href="#5-cooperative-caching-协作缓存">5) Cooperative Caching 协作缓存</a></li>
+</ul>
+</li>
+<li><a href="#4-d-caching-of-different-file-types-不同文件类型的缓存">4-D. Caching of Different File Types   不同文件类型的缓存</a></li>
+<li><a href="#4-e-mobility-awareness-移动意识">4-E. Mobility Awareness 移动意识</a></li>
+<li><a href="#4-f-impact-on-system-performance-对系统性能的影响">4-F. Impact on System Performance 对系统性能的影响</a></li>
+</ul>
+</li>
+<li><a href="#advances-in-communication-techniques-with-synergy-of-computing-and-caching">Advances in Communication Techniques with Synergy of Computing and Caching</a><ul>
+<li><a href="#a-mmwave-communication-毫米波通信">A. mmWave Communication (毫米波通信)</a></li>
+<li><a href="#b-d2d-communication-d2d通信">B. D2D Communication (D2D通信)</a></li>
+<li><a href="#c-transmission-schemes-传输方案">C. Transmission Schemes (传输方案)</a></li>
+<li><a href="#d-interference-management-干扰管理">D. Interference Management (干扰管理)</a></li>
+<li><a href="#e-communication-resources-allocation-and-scheduling通信资源分配和安排">E. Communication Resources Allocation and Scheduling(通信资源分配和安排)</a></li>
+<li><a href="#f-synergy-of-communication-computing-and-caching通讯计算和缓存的协同作用">F. Synergy of Communication, Computing and Caching(通讯，计算和缓存的协同作用)</a></li>
+</ul>
+</li>
+<li><a href="#applications-and-usecase">Applications and Usecase</a><ul>
+<li><a href="#a-dynamic-content-delivery-动态内容交付">A. Dynamic Content Delivery 动态内容交付</a></li>
+<li><a href="#b-augmented-realityvirtual-reality-增强现实虚拟现实">B. Augmented Reality/Virtual Reality 增强现实/虚拟现实</a></li>
+<li><a href="#c-intensive-computation-assistance-密集计算辅助">C. Intensive computation assistance 密集计算辅助</a></li>
+<li><a href="#d-video-streaming-and-analysis-视频流和分析">D. Video Streaming and Analysis 视频流和分析</a></li>
+<li><a href="#f-connected-vehicles-互联车辆">F. Connected Vehicles 互联车辆</a></li>
+<li><a href="#g-cognitive-assistance-认知援助">G. Cognitive Assistance 认知援助</a></li>
+<li><a href="#h-wireless-big-data-analysis-无线大数据分析">H. Wireless Big Data Analysis 无线大数据分析</a></li>
+</ul>
+</li>
+<li><a href="#key-enables">Key Enables</a><ul>
+<li><a href="#a-cloud-technology-云技术">A. Cloud Technology 云技术</a></li>
+<li><a href="#b-software-defined-network-软件定义的网络">B. Software Defined Network 软件定义的网络</a></li>
+<li><a href="#c-network-function-virtualization-网络功能虚拟化">C. Network Function Virtualization 网络功能虚拟化</a></li>
+<li><a href="#d-smarter-mobile-devices-更智能的移动设备">D. Smarter Mobile Devices 更智能的移动设备</a></li>
+</ul>
+</li>
+<li><a href="#open-challenges-and-future-directions">Open Challenges and Future Directions</a><ul>
+<li><a href="#a-open-research-challenges-开放研究挑战">A. Open Research Challenges 开放研究挑战</a><ul>
+<li><a href="#1-heterogeneity-异质性">1) Heterogeneity 异质性</a></li>
+<li><a href="#2-computation-modeling-计算建模">2) Computation Modeling 计算建模</a></li>
+<li><a href="#3-enabling-realtime-analytics-启用实时分析">3) Enabling Realtime Analytics 启用实时分析</a></li>
+<li><a href="#4-user-mobility-用户移动型">4) User Mobility 用户移动型</a></li>
+<li><a href="#5-pricing-policy-定价策略">5) Pricing Policy 定价策略</a></li>
+<li><a href="#6scalability-可扩展性">6）scalability 可扩展性</a></li>
+<li><a href="#7-security-安全">7） Security 安全</a></li>
+<li><a href="#8privacy">8）Privacy</a></li>
+<li><a href="#9user-participation">9）User Participation</a></li>
+</ul>
+</li>
+<li><a href="#b-discussions-on-future-directions">B. Discussions on Future Directions</a><ul>
+<li><a href="#1-utilization-of-wireless-big-data-无线大数据的利用">1) Utilization of Wireless Big Data 无线大数据的利用</a></li>
+<li><a href="#2-online-caching-在线缓存">2) Online Caching 在线缓存</a></li>
+<li><a href="#3-context-awareness上下文感知">3) Context Awareness上下文感知</a></li>
+<li><a href="#4smart-user-association-智能用户协会">4）Smart User Association 智能用户协会</a></li>
+<li><a href="#5-integration-集成">5) Integration 集成</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+<!-- tocstop -->
+
+<h2><span id="introduction">Introduction</span></h2><p>在过去的几十年中，移动蜂窝网络一直在稳步发展，从第一代（1G）纯语音系统到当前的第四代（4G）<strong>全IP LTE-Advanced</strong>网络。随着<strong>WCDMA，OFDMA，MIMO，CoMP等物理层以及异构网络（HetNet）和云无线接入网（C-RAN）等网络层的技术进步</strong>，系统容量和平均数据速率得到了极大的提高。在过去10年中，移动数据流量增长了4000倍，并且从2015年到2020年将继续以每年53％的速度增长。特别是，移动视频流量占了一半以上总移动数据流量，并且这个百分比一直在增长。此外，移动设备的计算能力越来越智能，并且出现了新的机器类型设备，例如可穿戴设备和人类设备之外的传感器。这导致了下一代移动网络中的大规模M2M连接（machine to machine）。</p>
+<p>​    机器类型通信（MTC）在无线网络中带来了广泛的新应用和服务。[2]中的作者介绍了蜂窝系统MTC的现状和挑战。最重要的挑战包括<u>大量的MTC设备</u>，<u>小的数据突发</u>，<u>低延迟和低功耗</u>。已经提出了各种解决方案来适应这些挑战[3]，[4]。由于MTC设备的处理能力受到限制，一种有希望的解决方案是<strong><u>将其任务转移到具有强大处理能力的地方</u></strong>。MTC的无处不在的连通性导致了<u><strong>强大的异构网络规范</strong></u>。为了适应从4G到新兴的5G系统的此类MTC应用，已经进行了研究工作[5]。</p>
+<p>​    初步的移动计算方案采用了2级层次结构，最初称为“<strong>服务器”</strong>和“<strong>客户端”</strong> [6]。后来，术语“<strong>云</strong>”用于表示<strong>具有计算和信息资源的服务器的集合</strong>，这导致了对移动云计算（MCC）的研究。与传统的计算卸载技术相比，移动云计算考虑了各种与移动相关的因素，例如<strong>设备能量，带宽利用率，网络连接性，移动性，上下文感知和位置感知</strong>[7]，[8]。</p>
+<p>​    针对MCC的不同方面，已经发表了许多调查文章。在[9]和[10]中，作者提出了有关移动云计算的一般性问题，包括体系结构，技术挑战和应用程序。在[11]中，讨论了有关移动云平台和访问方案的现有工作。作者比较了两个移动云平台，即<strong>Hyrax平台</strong>[12]和<strong>基于虚拟机（VM）的cloudlet **[13]，然后回顾了利用用户的位置和上下文进行智能访问的方案[14]。[7]中的作者详细说明了影响计算卸载决策的实体，并提供了详细的应用程序模型分类和最新的移动云应用程序模型。[15]中的作者基于关键问题以及解决这些问题的方法（如</strong>运营问题，端用户问题，服务水平问题，安全性，上下文感知和数据管理<strong>）提出了详细的移动云计算分类法。用户身份验证对于确保基于云的计算和通信非常重要。在[16]中，作者调查了MCC中最先进的身份验证机制，并将其与云计算中的机制进行了比较。    **MCC的优点可归纳如下。</strong></p>
+<ul>
+<li>首先，它可以为移动设备提供足够的资源并具有很大的灵活性。</li>
+<li>其次，由于资源的集中管理，可以降低MCC的成本。</li>
+<li>最后，所有任务在云中处理，MCC支持多种平台。图1说明了MCC的一般体系结构，它包含2个层：云层和移动设备。</li>
+</ul>
+<img src="/images/static/边缘计算/survey/ Convergence of Computing, Caching and Communications1.png" alt=" Convergence of Computing, Caching and Communications1" style="zoom:40%;">
+
+<p>​    尽管移动云计算有其优点，它仍然面临不可避免的问题。由于<u>从移动设备到Internet云的距离很长</u>，所以就有<strong>较长的延迟</strong>和<strong>回程带宽限制</strong>。</p>
+<hr>
+<p>​    部署在基站中的云服务器的<strong><u>移动边缘计算</u></strong>（MEC）是解决该问题的有前途的解决方案，因为计算能力更接近于移动设备[17]。<strong>MEC的优点</strong>包括<u><strong>低延迟，邻近，高带宽，实时无线网络信息和位置感知</strong></u>。MEC被欧洲5G PPP（5G基础设施公共私有伙伴关系）[2]确认为下一代5G网络的关键技术之一。</p>
+<p>​    [19]中的作者从不同方面描述了MEC的分类（taxonomy），包括其特征，访问技术，应用，目标等。他们还确定了MEC中的一些未解决问题。在[20]中，作者根据技术指标对部署在移动边缘的几个应用程序进行了分类：<strong>功耗，延迟，带宽使用和可伸缩性</strong>。还分析了MEC利益相关者可以获得的好处。对于<strong>移动用户和网络运营商</strong>来说，主要的好处是<strong>减少了延迟</strong>，从而有了<strong>快速的服务</strong>。对于<strong>应用程序服务提供商</strong>（ASP），他们可以受益于<strong>用户相关信息的利用</strong>。</p>
+<p>​    </p>
+<hr>
+<p>​    <strong><u>雾计算</u></strong>是另一个支持未来物联网（IoT）应用程序的边缘规范[21]。它使用诸如<strong>边缘路由器</strong>之类的<strong>近用户边缘设备</strong>来执行大量的计算任务。尽管在某些方面它是与MEC类似的概念，但它的特点是<strong>更适合IoT的环境[22]。</strong>OpenFog联盟由Cisco系统，ARM控股，戴尔，英特尔，微软和普林斯顿大学于2015年成立，旨在促进雾计算的发展和兴趣。在[22]中强调了雾计算的代表性应用和研究问题的各方面。</p>
+<p>​    <strong>1.增强现实和实时视频分析</strong>，<strong>2.内容交付以及 ，3.移动大数据分析</strong>将是受益于雾计算的三种驱动场景。</p>
+<p>​    雾服务的服务质量（QoS）指标包括四个方面：<strong>连接性，可靠性，容量和延迟</strong>。接口和编程模型，资源管理，安全性和隐私性是计算遇到的主要挑战。在[23]中，作者调查除云计算（如安全数据存储和安全计算）外，雾计算还面临着新的安全和隐私挑战。边缘模式中的安全威胁和挑战在[24]中进行了分析。作者在以下方面提出了<strong>具体的挑战和有希望的解决方案</strong>：身份和身份验证，访问控制系统，协议和网络安全，信任管理，入侵检测系统，隐私和虚拟化。</p>
+<hr>
+<p>​    学术界提出的一种相似的边缘计算概念称为<strong><u>微云</u>Cloudlet</strong> [25]，[13]。cloudlet是遥远的“云”的扩展。它是一个“盒子中的数据中心”，它是自我管理的，节能的，并且易于部署在诸如咖啡店或办公室之类的商业场所。部署cloudlet基础架构的一种方法是将cloudlet和WiFi接入点硬件集成到单个实体中。但是，广泛部署的cloudlet的管理具有挑战性。解决方案是使用硬件VM（虚拟机）技术对cloudlet基础架构进行临时定制[25]。</p>
+<hr>
+<p>​    通过<strong>移动蜂窝网络</strong>对大规模多媒体服务的需求不断增长，对<strong>网络容量</strong>和<strong>backhaul回程链路</strong>提出了巨大挑战。<strong><u>移动边缘缓存和交付技术</u></strong>的出现是应对这些挑战的有前途的解决方案[26]。在传统的集中式移动网络体系结构中，最终<strong>用户的内容请求</strong>由<strong>远程Internet内容提供商</strong>提供。在这种情况下，必须通过整个移动网络传输重复的流量，这会导致<strong>网络拥塞和网络资源</strong>的浪费。在<strong>网络边缘缓存流行的内容</strong>（例如网关，基站和最终用户设备）可以<strong>避免重复传输相同的内容</strong>，并且由于<strong>减少了等待时间</strong>而提高了用户的<strong>体验质量</strong>。</p>
+<p>​    <strong><u>缓存</u></strong>的概念在蜂窝网络中并不是什么新鲜事物。它已被用于<strong>Web缓存</strong>和<strong>以信息为中心的网络</strong>中。[27]研究了网络缓存和预取技术以提高网络性能。提出了缓存策略的分类，例如基于新近度的策略（例如LRU）least recency-based policies，基于频率的策略（例如LFU）least frequency-based policies，基于大小的策略size-based policies，基于功能的策略 function-based policies 和随机策略randomized policies。此外，[28]中的作者描述了<strong>缓存替换策略</strong>的优缺点，并概述了现代代理缓存中的潜在研究主题。[29]和[30]中的作者分别研究了以信息为中心的网络中的缓存机制及其缓存的能量效率。<strong>但是，由于无线蜂窝网络的特性，上述缓存技术不能直接应用。</strong>蜂窝网络中的缓存方案应进行彻底研究。</p>
+<hr>
+<p>​    尽管上述边缘规范具有优点，但它们使得无线网络变得异构化并且难以以传统方式进行管理。网络等新兴技术<strong>网络功能虚拟化（NFV）,软件定义的网络（SDN）</strong>是使网络灵活且易于维护的有前途的解决方案。</p>
+<p>​    NFV网络功能虚拟化是最近提出的一种网络架构，它利用IT虚拟化技术在标准通用硬件的基础上虚拟化网络节点功能，从而使通信网络基础设施变得更具成本 效益[31]。</p>
+<p>​    SDN软件定义的网络是将控制平面和数据平面的功能分开的计算网络体系结构。在传统的移动网络中，控制平面和用户平面（或数据平面）都集成在宏基站 macro base station上。这种网络架构无法满足未来5G网络中爆炸性的流量和连接增长的需求。基于SDN的概念，zhang el al.提出了新的架构。[32]提出了一种<strong>宏辅助数据纯载波</strong>方案(macro-assisted data-only carrier scheme)，将<strong>控制功能和数据功能</strong>分别划分为<strong>宏基站</strong>（MBS）和<strong>小型基站</strong>（SBS）。Pentikousis等[33]引入并验证了软件定义的<strong>移动网络架构</strong>，该架构提高了运营商的能力并缩短了新服务的上市时间。</p>
+<hr>
+<p>表I显示了有关移动计算和缓存的现有调查文章的摘要。</p>
+<p>​                        <img src="/images/static/边缘计算/survey/ Convergence of Computing, Caching and Communications4.png" alt=" Convergence of Computing, Caching and Communications4" style="zoom:100%;"></p>
+<p>移动边缘网络的上述优势和进步促使我们进行全面的文献调查。</p>
+<h3><span id="11-本文的主要贡献">1.1 本文的主要贡献</span></h3><p>1）提出了对<strong>移动边缘网络体系结构的全面调查</strong>，包括<strong>MEC，雾计算，Cloudlets和边缘缓存</strong>。总结了不同边缘计算方案的比较。指出了<strong>移动边缘网络的优势。</strong></p>
+<p>2）对移动边缘计算和缓存的关键技术进行了全面综述。特别是对于网络边缘的计算，阐述了与<strong>计算卸载</strong>，<strong>边缘与核心网络之间的协作</strong>，与5<strong>G相结合</strong>以及所提出的平台相关的文献。作为<strong><u>边缘缓存</u></strong>，综述了<strong>内容流行度，缓存策略，调度和移动性管理</strong>等方面的研究进展。</p>
+<p>3）全面总结了移动边缘网络的应用和用例。指出了移动边缘网络的关键推动力，包括<strong>云技术</strong>，<strong>软件定义网络</strong>，<strong>网络功能虚拟化</strong>和<strong>更智能的移动设备。</strong></p>
+<p>4）确定了与移动边缘网络相关的开放性问题和挑战，例如<strong>网络异构性</strong>，<strong>实时分析，定价，可伸缩性，无线大数据的利用，上下文感知</strong>等。</p>
+<h3><span id="12-本文的其余部分">1.2 本文的其余部分</span></h3><p>在第二部分，概述了移动边缘网络，包括定义，体系结构和优点。</p>
+<p>在第三部分中，对移动边缘网络中与计算相关的问题进行了详尽的文献调查。</p>
+<p>在第四部分中，对边缘缓存的研究工作进行了全面调查。</p>
+<p>在第五部分中，讨论了通信技术与计算和缓存协同作用的进步。</p>
+<p>在第六部分中，解释了移动边缘网络的应用和用例。</p>
+<p>在第七部分中，总结了移动边缘网络的关键促成技术。</p>
+<p>第八部分中显示了开放的挑战和未来的方向。</p>
+<p>最后，在第九部分中得出结论。（为了方便起见，所有缩写的摘要显示在表II中。）</p>
+<hr>
+<h2><span id="overview-of-mobile-edge-networks">Overview of Mobile Edge Networks</span></h2><p>移动边缘网络概述</p>
+<p>​    随着信息和电信技术的发展，移动蜂窝网络的发展在过去的二十年中经历了四代。同时，用户对移动网络的要求也变得越来越严格，例如超高数据速率和极低的延迟。而且，由于诸如虚拟现实和物联网之类的新型智能设备和新应用的出现，出现了各种新的要求。传统的以基站为中心的网络体系结构不能再满足这些要求。<u>在未来的5G系统中</u><em>，<u>移动蜂窝网络架构</u></em>已从<strong>以BS为中心</strong>发展到<strong>以设备为中心</strong>[34]和<strong>以内容为中心的网络</strong>，其中<strong>重心从网络核心移向边缘</strong>[35]。</p>
+<p>​    在本节中，我们将首先</p>
+<ol>
+<li>解释什么是移动边缘网络。</li>
+<li>然后介绍了移动边缘网络的体系结构。</li>
+<li>最后，我们讨论了移动边缘网络的优势。</li>
+</ol>
+<hr>
+<h3><span id="a-what-is-mobile-edge-networks">A. What is Mobile Edge Networks？</span></h3><p>​    <strong><u>移动边缘网络</u>的核心思想是<u>利用SDN和NFV技术使网络功能，内容和资源更接近最终用户，即网络边缘</u>。<u>网络资源</u>主要包括<u>计算，存储或缓存</u>以及通信资源。</strong></p>
+<p>​    尽管某些文献中的缓存包含在计算资源中[20]，但由于它们涉及的服务类型和问题不同，因此在本文中我们将分别讨论它们。</p>
+<p>​    <strong>移动网络中的边缘计算</strong>是从<strong>移动云计算</strong>发展而来的，移动云计算是一种将计算能力和数据存储从移动设备转移到云中以利用云平台强大的计算和存储能力的架构[10]。然而，<strong>移动云计算</strong>面临着诸如<strong>长时延和高回程带宽消耗</strong>之类的挑战，因此<strong>不适合实时应用</strong>。[10]中的作者详细列出了MCC面临的技术挑战。在移动通信方面，由于无线网络的特性（例如，稀缺的无线资源，业务拥塞和多种无线接入技术（multi-RAT））所带来的挑战包括<strong>低带宽，服务可用性和异构性</strong>。在计算方面，环境变化下的高效，动态的计算卸载，以及用户和数据的安全性问题，数据访问的效率和上下文感知都面临挑战。相比之下，<strong>边缘计算使网络边缘具有云计算功能。</strong></p>
+<p>​    工业界和学术界提出了<strong>三种</strong>不同的边缘计算方案：<strong>移动边缘计算，雾计算和cloudlet</strong>。移动边缘计算是由标准组织欧洲电信联盟标准协会（ETSI）提出的[17]。它基于<u>虚拟化平台</u>，该平台使应用程序可以在网络边缘运行。同时，<u>NFV的基础结构可以被应用程序重用</u>，这对网络运营商是有利的。<u>MEC服务器</u><strong>可以部署在网络边缘的各个位置</strong>，例如LTE宏基站（eNodeB）macro base station，3G无线电网络控制器3G Radio Network Controller （RNC）以及聚集点aggregation point。部署位置可能会受到延迟，所需资源，可用性，可扩展性和成本的影响。MEC应用程序可以根据诸如延迟，所需资源，可用性，可扩展性和成本之类的技术参数，智能，灵活地无缝部署在不同的MEC平台上。ETSI MEC的目标是为第三方应用<u><strong>提供标准的体系结构和行业标准化的API</strong></u> [36]。</p>
+<p>​    <strong>雾计算</strong>是另一种边缘计算架构，旨在适应思科最初提出的物联网应用[36]。雾计算是云计算范例向无线网络边缘的扩展[21]。雾计算源于类比，即雾比云更接近人。同样，与大型数据中心相比，物联网设备到雾计算平台的距离更近。Cisco认为雾计算的必要性是，<strong>物联网应用的2层部署不足以满足低延迟</strong>，移动性和位置感知的需求[36]。<strong>该解决方案是一个多层体系结构，在设备和主云之间部署了一个中间雾平台。</strong>雾计算的主要特征是它是一个完全分布式的多层云计算架构，其中<strong>雾节点部署在不同的网络层</strong>中[37]。</p>
+<p>​    <strong>微云Cloudlet</strong>的概念是由CMU的一个学术团队开发的[25]。它可以部署在<strong>Wi-Fi网络</strong>和<strong>蜂窝网络</strong>中。当设备移动时，cloudlets的关键特征是对<strong>边缘节点</strong>的应用程序<strong>近乎实时的配置</strong>以及<strong>边缘节点之间虚拟机映像的切换</strong>[36]。</p>
+<p>​    <strong>移动边缘缓存</strong>被提出是为了应对未来移动网络中<strong>大量内容交付</strong>的挑战。<strong>存储的先进性</strong>使网络能够利用网络中不同位置的大量低成本存储资源。蜂窝网络的业务负载在时空域中是动态变化的[38]。<strong>主动缓存</strong>是一种通过在<strong>非高峰时段</strong>主动缓存<strong>流行内容</strong>来利用这种流量动态性的方法，从而减少了峰值流量需求[39]。由于缓存单元部署在网络边缘，因此可以利用许多信息来<strong>提高缓存效率。</strong>例如，<u>可以利用用户的社交结构通过D2D（device to device）通信来缓存和分发内容。</u></p>
+<p>​    在上述讨论的基础上，我们将<strong><u>移动网络</u></strong>定义为：“借助<strong><u>SDN和NFV</u></strong>技术，在<strong><u>移动网络边缘</u></strong>部署和利用灵活的<strong><u>计算和存储资源</u></strong>，包括无线接入网、边缘路由器、网关和移动设备等的移动网络体系结构。</p>
+<hr>
+<h3><span id="b-architecture-of-mobile-edge-networks">B. Architecture of Mobile Edge Networks</span></h3><p>移动边缘网络引入了新的处理计算和存储资源的方式。工业界和学术界都提出了关于MEN（mobile edge networks）架构的建议。<br>我们将介绍具体的体系结构，包括ETSI MEC、雾计算、Cloudlet和边缘缓存。<br>然后，我们将对这些建议进行总结，并给出MEN的总体架构。</p>
+<h4><span id="b-1-移动边缘计算">B-1 移动边缘计算</span></h4><p>移动边缘计算已经引起了产业界和学术界的广泛关注。<br>在行业方面，ETSI于2014年12月在MEC上推出了行业规范小组(ISG)。ISG生产的规范支持在标准的MEC环境中托管第三方创新应用程序[17]。该集团已经发布了关于服务场景、要求、架构和API的几个规范。<br>图2显示了MEC的体系结构。MEC服务器位于基站附近。<br>它们可以处理用户请求并直接响应UE（user end），或者将请求转发到远程数据中心和内容分发网络(CDN)[40]。</p>
+<hr>
+<p>名词解释：</p>
+<h5><span id="backhaul">Backhaul</span></h5><p> <a href="https://zhuanlan.zhihu.com/p/145532668" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/145532668</a></p>
+<hr>
+<h5><span id="cdn">CDN</span></h5><p><a href="https://www.zhihu.com/question/36514327?rf=37353035" target="_blank" rel="noopener">https://www.zhihu.com/question/36514327?rf=37353035</a></p>
+<p>CDN的意图就是尽可能的减少资源在转发、传输、链路抖动等情况下顺利保障信息的连贯性</p>
+<p>CDN的基本原理是广泛采用各种缓存服务器，将这些缓存服务器分布到用户访问相对集中的地区或网络中，在用户访问网站时，利用全局负载技术将用户的访问指向距离最近的工作正常的缓存服务器上，由缓存服务器直接响应用户请求。 </p>
+<h5><span id="cdn基础架构"><strong>CDN基础架构：</strong></span></h5><p>最简单的CDN网络由一个DNS服务器和几台缓存服务器组成：</p>
+<ol>
+<li><p>当用户点击网站页面上的内容URL，经过本地DNS系统解析，DNS系统会最终将域名的解析权交给CNAME指向的CDN专用DNS服务器。</p>
+</li>
+<li><p>CDN的DNS服务器将CDN的全局负载均衡设备IP地址返回用户。</p>
+</li>
+<li><p>用户向CDN的全局负载均衡设备发起内容URL访问请求。</p>
+</li>
+<li><p>CDN全局负载均衡设备根据用户IP地址，以及用户请求的内容URL，选择一台用户所属区域的区域负载均衡设备，告诉用户向这台设备发起请求。</p>
+</li>
+<li><p>区域负载均衡设备会为用户选择一台合适的缓存服务器提供服务，选择的依据包括：根据用户IP地址，判断哪一台服务器距用户最近；根据用户所请求的URL中携带的内容名称，判断哪一台服务器上有用户所需内容；查询各个服务器当前的负载情况，判断哪一台服务器尚有服务能力。基于以上这些条件的综合分析之后，区域负载均衡设备会向全局负载均衡设备返回一台缓存服务器的IP地址。</p>
+</li>
+<li><p>全局负载均衡设备把服务器的IP地址返回给用户。</p>
+</li>
+<li><p>用户向缓存服务器发起请求，缓存服务器响应用户请求，将用户所需内容传送到用户终端。如果这台缓存服务器上并没有用户想要的内容，而区域均衡设备依然将它分配给了用户，那么这台服务器就要向它的上一级缓存服务器请求内容，直至追溯到网站的源服务器将内容拉到本地。</p>
+</li>
+</ol>
+<hr>
+<img src="/images/static/边缘计算/survey/ Convergence of Computing, Caching and Communications2.png" alt=" Convergence of Computing, Caching and Communications2" style="zoom:60%;">
+
+
+
+<h4><span id="b-2-雾计算">B-2 雾计算</span></h4><p>​    雾计算是一个主要针对物联网用例设计的平台。其成分雾结点分布广泛。</p>
+<p>​    Fog的主要特征是它利用多个终端用户客户端或近用户边缘设备之间的协作来帮助处理和存储移动设备[41]。与云相比，雾计算在三个方面具有优势：<strong><u>开发存储</u></strong>、<strong><u>计算和控制功能</u></strong>、在终端用户或<strong>接近终端用户时进行通信和联网[</strong>42]。</p>
+<p>​    在雾计算看来，<strong>边缘</strong>是<strong>核心网络的一部分，是数据中心。</strong>雾和云相辅相成，使<strong>计算、存储和通信</strong>在云和端点之间的连续过程中的<strong>任何位置</strong>都成为可能。</p>
+<p>​    雾计算也被集成到C-RAN体系结构中以形成FogRAN体系结构[43]。雾计算的体系结构如图3所示，它包括三层：<strong>云层、雾层和设备层。</strong>雾层可以根据需要<strong>包含多个层。</strong>雾节点可以是<strong>小型基站、车辆、WiFi接入点甚至用户终端</strong>，这些设备选择最合适的雾节点进行关联。</p>
+<hr>
+<h4><span id="b-3-微云cloudlet">B-3 微云Cloudlet</span></h4><p>​    Cloudlet提案是一个三层架构：“设备-云-云”[36]。<br>​    Cloudlet可以部署在<u><strong>WiFi接入点或LTE基站[13]</strong></u>。许多新应用程序需要1毫秒的端到端延迟。<br>理论上，1ms的传播延迟需要微云Cloudlet<strong>在300km内</strong>以光速传递，而现实中，为了保证延迟要求，小云块应该布置得更近一些。5G蜂窝网络和云端的结合将使这成为可能[44]。图4说明了Cloudlet系统的一般架构。<br>​    为了克服单一云小程序能力有限的问题，需要不同云小程序之间的协作来满足用户需求[45]。<br>表三总结了不同移动计算体系结构的比较。</p>
+<hr>
+<h4><span id="b-4-边缘缓存">B-4 边缘缓存</span></h4><p>​    移动边缘网络中的缓存已被证明是有益的。<br>由于不同类型基站的密集部署，未来的移动网络将是<strong>异构</strong>的。因此，缓存可以部署<strong>在移动网络中的各个位置</strong>。<br>在传统蜂窝系统中，用户请求的内容必须从<strong>远离移动网络</strong>的Internet  <strong>CDN节点取回</strong>。<br>​    然后，在移动核心网实现内容缓存。但是，<strong>回程链路backhaul</strong>仍然受到约束。<br>另外，随着<strong>基站和低成本存储单元</strong>的发展，在<strong>宏基站</strong>macro base station和<strong>小型基站上</strong>small bs部署Cache<strong>成为可能。<br>​    在未来的5G网络中，</strong>D2D<strong>通信可以根据用户之间的社会关系，</strong>利用用户设备上的存储单元**进行内容共享，如图5所示，给出了边缘缓存的总体架构。</p>
+<p> 小蜂窝用户SUE   small cell user equipment</p>
+<img src="/images/static/边缘计算/survey/ Convergence of Computing, Caching and Communications3.png" alt=" Convergence of Computing, Caching and Communications3" style="zoom:70%;">
+
+<hr>
+<h4><span id="b-5-总结对比">B-5 总结对比</span></h4><p>![ Convergence of Computing, Caching and Communications5](/images/static/边缘计算/survey/ Convergence of Computing, Caching and Communications5.png)</p>
+<hr>
+<h3><span id="c-advantages-of-mobile-edge-networks">C. Advantages of Mobile Edge Networks</span></h3><p>研究人员发现，与传统的集中式网络架构相比，移动边缘网络具有多方面的优势。</p>
+<p><strong>1)降低时延</strong>：<u>由于处理和存储能力接近终端用户，可以显著降低通信时延。</u></p>
+<p>受益于此的主要应用是计算卸载和视频内容交付。[46]的工作表明，使用MEC和云相结合的解决方案可以在不影响网络性能的情况下减少卸载包延迟。作者在[47]中证实，在WiFi和LTE网络中，通过边缘计算平台卸载可以大大改善高度交互和计算密集型应用(如增强现实和认知辅助)的延迟。Gaoet al[13]目前来自Wi-Fi和4G LT网络的实验结果表明，与云卸载相比，将负载转移到Cloudlets可以将响应时间提高51%。</p>
+<p><strong>2)带宽减少</strong>：<u>对于带宽需求大的应用和计算密集型应用，在移动边缘网络基础设施中部署边缘服务器可以节省高达67%的运营成本。</u><br>研究结果表明，使用主动缓存方案可以节省高达22%的回程成本[39]。如果提高了存储能力，则有可能获得更高的收益。</p>
+<p><strong>3)高能效：</strong>实验结果表明，对于WiFi网络和LTE网络中的不同应用，<u>边缘计算都能显著降低能耗[47]。</u><br>[49]对云计算中使用中心数据中心(DC)和雾计算中使用纳米数据中心(DC)的应用的能耗进行了比较，结果表明，使<strong>用纳米DC可以节能</strong>，其节能效果受接入<u>网络类型、纳米DC的活动时间与空闲时间的比例以及应用类型等</u>因素的影响。研究发现，与云卸载相比，移动设备通过云卸载的能耗最高可降低42%[13]。</p>
+<p><strong>4)邻近服务：</strong>移动教育网络的架构在提供邻近服务方面具有很大优势，<u>因为边缘服务器离终端用户更近，并且可以利用D2D通信技术[50]。</u></p>
+<p><strong>5)上下文信息的利用：</strong>部署在无线接入网络中不同位置的MEC服务器可以获得详细的上下文信息，包括<u>网络级信息、设备级信息</u>[50]。有了这些信息，<u>可以更有效地分配网络资源，改善用户体验。</u>例如，基于位置的应用程序可以直接部署在MEC服务器上，而不是部署在远离用户的互联网云上</p>
+<hr>
+<h2><span id="computing-at-mobile-edge-networks">Computing at Mobile Edge Networks</span></h2><p>​    计算(算力)是移动网络中的主要资源。最近出现了许多计算密集型应用程序，例如作为增强现实、高清视频流和互动游戏。然而，移动设备的计算能力受到很大的限制。另外，对于当前移动设备的电池容量而言，这些计算任务的功耗非常高。边缘计算范例可以将计算任务卸载到功能强大的边缘服务器。边缘网络的计算有多大好处？为了找到这个问题的答案，已经做了很多工作。在这一部分中，我们将综述关于这一问题的最新研究成果。</p>
+<hr>
+<h3><span id="3-a-objective">3-A Objective</span></h3><p>​    边缘计算的好处是多方面的。不同的应用或系统可能具有不同的性能要求。我们将介绍一些边缘计算可以达到的常见性能目标。</p>
+<hr>
+<h4><span id="1-能耗最小化">1) 能耗最小化</span></h4><p>​    对边缘计算的能效进行了大量的评估工作，针对网络端和设备端的能耗最小化提出了各种优化方案。在5G异构网络中进行计算卸载时，需要同时考虑<strong>任务计算</strong>和<strong>文件传输</strong>的能量开销。<br>​    </p>
+<p><strong>Zhang某等人。[51]设计了一种节能的计算卸载方案，在时延约束下，联合优化无线资源分配和卸载，最小化卸载系统的能耗。</strong></p>
+<p>​        首先根据设备的能力和要求将其分为三种类型。</p>
+<ol>
+<li>然后，它们把MBS和SBS的无线信道，迭代的根据移动设备的优先级分配给移动设备，直到无线资源用完或所有设备都被分配了所需的信道。</li>
+<li>在每步迭代步骤中，该方案保证了系统获得最小的能量开销。</li>
+<li>结果表明，该方案在无负载计算的情况下具有较低的能耗，特别是在移动设备数量较多的情况下。</li>
+</ol>
+<p>​    在[52]中，作者研究了<strong>雾与云之间的能量感知</strong>相互作用。结果表明，<strong><u>在不明显降低网络性能的情况下，可以降低数据中心的整体能耗</u></strong>。</p>
+<hr>
+<h4><span id="2最大限度地提高容量">2)最大限度地提高容量</span></h4><p>​    下一代5G网络需要比当前4G LTE网络高1000倍/每区域 移动数据量支持[53]。<br>这就要求在RAN、回传和前传（fronthaul backhaul）有更大的容量。卸载是解决RAN中的挑战的技术组合之一，此外还有更多的频谱、网络密集化和更高的频谱效率[54]。将雾和云操作相结合的策略可以实现较高的系统容量，同时为请求的服务提供低延迟[55]。</p>
+<hr>
+<h4><span id="3最小化时延">3)最小化时延</span></h4><p>时延是影响用户体验的重要性能指标。下一代5G网络的延迟要求是1ms往返时间(RTT)，几乎比4G的10ms RTT减少了10倍[34]。对于实时应用，将任务卸载到云带来的延迟是不可接受的。增强高密度SBS的计算能力是一种更可行的方法。</p>
+<p>​    作者在[56]<strong>中提出了一种适用于延迟敏感应用的分布式云感知功率控制算法</strong>。</p>
+<p>​    在[57]中，提出了<strong>功耗约束下的时延最小化问题</strong>。针对MEC系统设计了一种最优计算任务调度策略。LTE下行链路中的一般业务流的延迟可以通过部署在eNodeB[58]处的MEC<strong>服务器的服务级别调度</strong>来最小化。</p>
+<p>​    <strong><u>雾还提供低延迟，但容量限制较低，而雾和云的联合运行可以最大限度地减少服务延迟，同时保证容量需求[55]。</u></strong></p>
+<hr>
+<h4><span id="知识小补充">知识小补充：</span></h4><p>D2D（Device to Device）通信是指UE不经过基站可以直接进行通信，每一个D2D通信链路占用的资源与一个蜂窝通信链路占用的相等，可以提高资源利用率和网络容量。而M2M是5G通信的一个研究热点，不仅包括UE还包括各种Machine之间的通信。</p>
+<hr>
+<h3><span id="3-b-computation-offloading">3-B Computation Offloading</span></h3><p>​    边缘计算的<strong><u>主要目的</u></strong>之一是进行<strong><u>计算卸载</u></strong>，以打破移动设备在计算能力、电池资源和存储可用性等方面的限制。何时以及如何卸载计算任务是一个难题。在单一用户、多用户以及车载网络[59]、[60]、[61]等多种场景下，已经提出了多种方法来解决这一问题。此外，在下一代异构网络中，通过利用D2D通信[51]、[62]，<strong><u>计算任务不仅可以卸载到服务器上，还可以卸载到设备上</u></strong>。表中显示了有关计算卸载的文献摘要。</p>
+<hr>
+<h4><span id="1-单用户情况-singlei-user-case">1） 单用户情况 singlei User Case</span></h4><p>​    对于单用户情况，需要分析在移动设备上执行移动应用(移动执行)还是卸载到云上的最佳选择[8]。<br><strong>一个共同的设计目标</strong>是为<strong><u>移动设备节省能源。</u></strong><br>考虑无线网络中的随机（stochastic）信道条件，需要得到最优的调度策略。<br>​    <strong>在[61]中，根据<u>能量消耗模型和无线信道模型</u>推导了一种基于阈值的调度策略。</strong></p>
+<p>​    <strong>在[59]中</strong>，针对具有<strong><u>能量采集装置</u></strong>的MEC系统，提出了一种<strong>低复杂度</strong>的在线算法。该算法称为基于<strong>李雅普诺夫优化</strong>（Lyapunov optimization-based）的动态计算卸载算法，它联合确定卸载决策、CPU周期频率和卸载发射功率。</p>
+<p>​    作者在[63]中研究了<strong><u>以最小化设备能耗和应用程序执行延迟为目标</u></strong>的<strong>部分计算卸载问题。</strong><br>他们同时考虑<strong><u>单服务器方案和多服务器</u></strong>方案。结果表明，当器件具有动态定压能力时，局部执行是最优的，而总卸载不是最优选择。</p>
+<hr>
+<h4><span id="2-多用户情况-multi-user-case">2） 多用户情况 Multi-user Case</span></h4><p>​    多用户情况下的卸载问题比单用户情况下的卸载问题更为复杂。在这个问题上已经做了很多研究工作。</p>
+<p>​    Chen等人[64]证明了<strong>多用户计算卸载问题</strong>是<u><strong>NP-hard</strong></u>问题，并提出了一种有效的计算卸载决策的<strong>分布式博弈论</strong>方法。</p>
+<p>​    在[65]中，作者对<strong>无线资源</strong>和<strong>计算资源</strong>进行了联合优化，以<strong>最小化</strong>具有时延约束的<strong>MIMO</strong>multi-cell系统中用户的<strong>总能量消耗</strong>，其中<strong>多个用户将计算任务卸载到一个公共云服务器</strong>。<br>针对这一<strong>非凸问题</strong>，提出了一种基于<strong>逐次凸逼近技术</strong>的迭代算法。</p>
+<p>​    Huang et al等人。[66]研究同时<strong>采用时分多址(TDMA)和正交频分多址(OFDMA)的多用户移动边缘计算卸载系统</strong>的最优资源分配问题。</p>
+<p>​    作者在[67]中将多用户<strong>计算卸载问题转化为多背包问题</strong>，并提出了一个求解该问题的<strong>启发式算法。</strong></p>
+<p>​    在[68]中，考虑了密集cell间干扰环境和MEC计算资源的限制。提出了一种<strong>自适应顺序卸载博弈方法</strong>，通过自适应<strong>调整卸载用户数</strong>来<strong>减小排队延迟</strong>。</p>
+<p>作者在[69]中提出了一种<strong>在线数据流任务</strong>的<strong>机会式计算卸载方案。</strong><br>使用从12个用户收集的500万个活动的事件数据流对该方案进行了15天的评估，结果显示数据显著减少了98%</p>
+<hr>
+<p>​    <strong>启发式算法</strong>（heuristic algorithm)是相对于<a href="https://baike.baidu.com/item/最优化" target="_blank" rel="noopener">最优化</a>算法提出的。一个问题的最优算法求得该问题每个实例的<a href="https://baike.baidu.com/item/最优解/5208902" target="_blank" rel="noopener">最优解</a>。启发式算法可以这样定义：一个基于直观或经验构造的算法，在可接受的花费（指计算时间和空间）下给出待<strong>解决组合优化问题</strong>每一个实例的一个<a href="https://baike.baidu.com/item/可行解/962143" target="_blank" rel="noopener">可行解</a>，该可行解与最优解的偏离程度一般不能被预计。现阶段，启发式算法以仿自然体算法为主，主要有<a href="https://baike.baidu.com/item/蚁群算法/9646604" target="_blank" rel="noopener">蚁群算法</a>、<a href="https://baike.baidu.com/item/模拟退火法/10423893" target="_blank" rel="noopener">模拟退火法</a>、<a href="https://baike.baidu.com/item/神经网络/16600562" target="_blank" rel="noopener">神经网络</a>等。</p>
+<hr>
+<h4><span id="3-卸载到mec服务器-offloaded-to-mec-server">3） 卸载到MEC服务器   Offloaded to MEC Server</span></h4><p>卸载到MEC服务器：卸载计算任务的<strong>常见位置</strong>是MEC服务器。</p>
+<p>在[70]中提出的REPLISOM架构将<strong>多个物联网设备</strong>产生的<strong>存储对象卸载</strong>到位于LTE     eNodeB的<strong>边缘云。</strong></p>
+<p>在[71]中，基于<strong>协商卸载策略的通信协议</strong>将视频呼叫过程中的<strong>视频编码过程卸载到MEC边缘服务器</strong>，降低了移动设备在视频呼叫过程中的<strong>能耗。</strong></p>
+<p>[72]针对<strong>多用户雾计算场景</strong>中的负载均衡问题，提出了一种<strong>低复杂度的雾聚类算法</strong>。<br>提出了一种两层无线接入点聚类算法，该算法比单一的集中式和分散式策略[60]获得更好的体验质量。</p>
+<p>[73]文中综合考虑了<strong>能耗、时延和执行单位</strong>成本，设计了<strong>任务卸载的最优方案。</strong><br>他们根据移动设备有限的能量和计算单元定义了<strong>机会消费的概念</strong>。</p>
+<h4><span id="4-卸载到设备-offloaded-to-devices">4） 卸载到设备 Offloaded to devices</span></h4><p>随着智能设备技术的进步，使用<strong>D2D技术</strong>可以利用更多的计算资源。</p>
+<p>​    可以利用共处一地的移动设备的集合来在边缘提供云服务[62]。</p>
+<p>在这种情况下，<strong>计算任务</strong>可以被卸载到附近的<strong>移动设备，</strong>而<strong>不是MEC服务器</strong>，任务调度问题需要重新研究，这与卸载到服务器上的任务调度问题不同。</p>
+<hr>
+<h4><span id="5-mobility-awareness-移动性意识">5） Mobility Awareness 移动性意识</span></h4><p>在移动边缘网络中，用户移动性是不可忽视的。<br>由于用户的移动性，<strong>用户和MEC服务器之间的联系时间是动态的</strong>，这将影响卸载策略，特别是在哪里以及卸载什么。</p>
+<p>作者在[75]中提出了一个移动性模型，该模型认为<strong>任意两个用户之间的相互联系时间服从指数分布</strong>。</p>
+<p>在此模型的基础上，在文献[74]中提出了<strong>移动性感知的计算卸载策略。</strong></p>
+<hr>
+<h3><span id="3-c-cooperation-between-the-edge-and-the-core">3-C Cooperation between the edge and the core</span></h3><p>​    尽管移动边缘网络具有时延低、能量效率高等优点，但是移动边缘网络的计算资源仍然有限。<u>要发挥<strong>边缘网络</strong>和<strong>核心网络云平台</strong>的优势，两者之间的<strong>合作</strong>是很有价值的。</u><br>​    文献[76]研究了<strong>雾云联合计算系统中的工作量分配问题</strong>。作者设计了一种近似方案来权衡功耗和延迟，仿真结果表明雾和云之间的协作可以显著提高云计算的性能。<br>​    在[77]中提出了一种结合<strong>雾计算和公共/私有物联网云的混合方法</strong>来支持<strong>集成物联网应用</strong>。提出的解决方案可以提高<u>任务请求的成功执行数量</u>。<br>​    在[55]中，作者将<strong>雾和云</strong>的操作相结合，以同时<strong>提高延迟性能和系统容量</strong>。</p>
+<hr>
+<h3><span id="4-d-platforms">4-D Platforms</span></h3><p>​    在对移动边缘计算进行理论探讨的基础上，初步实现了<strong><u>移动边缘计算服务器。</u></strong><br><strong>诺基亚</strong>网络在2014年推出了一个真实的MEC平台：无线应用云服务器(RACS)[78]。<br>RACS使用<strong><u>VM虚拟机</u></strong>管理程序部署<strong><u>执行MEC应用程序的虚拟机映像。</u></strong><br>​    [79]根据工业物联网过程的操作需求，提出了一种自适应操作平台adaptive operation platform(AOP)来管理雾计算基础设施。AOP包括几个功能元素：<strong>Model Building元素、Rule Mapper元素和Rule Deployer元素</strong>。<br>​    在[80]中，作者<strong>以M2M Fog平台为例，</strong>评估了将Fog节点连接到LTE Network的三种不同部署：基于<u><strong>宏蜂窝的遗留部署、基于D2D的部署和基于小蜂窝的部署</strong></u></p>
+<hr>
+<h2><span id="caching-at-mobile-edge-networks">Caching at Mobile Edge Networks</span></h2><p>要在移动网络中开发缓存技术，需要研究很多问题。<br><strong><u>在哪里缓存？缓存什么？如何缓存？</u></strong><br>传统的以<strong>内容为中心的网络缓存方案</strong>没有考虑无线网络的<strong><u>动态流量负载</u></strong>和<strong><u>干扰等特性</u></strong>[81]。<br>在这一部分中，我们将综述在移动边缘网络中所做的研究工作。<br>相关问题包括。</p>
+<ol>
+<li>缓存位置</li>
+<li>内容描述</li>
+<li>缓存策略</li>
+<li>内容交付等。</li>
+</ol>
+<p>有关边缘缓存的文献摘要如表V所示。</p>
+<hr>
+<h3><span id="4-a-cashing-places-缓存的位置">4-A Cashing Places 缓存的位置</span></h3><p>在移动网络中有许多可以部署高速缓存单元的地方。<br>在基于全IP的蜂窝网络中，可以部署缓存的<strong><u>三个主要位置是核心网、无线接入网(RAN)和用户设备。</u></strong><br>目前广泛部署的缓存位置是演进包核心(EPC)[26]。evolved packet core<br>通过在<u>移动核心网络</u>缓存内容，移动通信量可以减少三分之一到三分之二。此外，在EPC处部署缓存在技术上比在RAN处更容易。<br>边缘网络的缓存位置如下所述</p>
+<hr>
+<h4><span id="1-mbs-caching-mbs缓存">1) MBS Caching    （MBS缓存）</span></h4><p>在异构网络中，MBSs具有更大的覆盖范围，可以为更多的用户提供服务。<br>以MB为单位进行缓存可以获得更好的<strong><u>缓存命中概率</u></strong>。</p>
+<p>在[82]中，研究了MBS的<strong><u>反应式和主动式缓存的性能</u></strong>。提出了一种结合边缘缓存的视频感知回传和无线信道调度技术。结果表明，该算法可以显著提高视频容量，降低视频的失速概率。</p>
+<p>作者在[83]中研究了MBS缓存的存储分配问题。他们提出了一种启发式方法来解决NP-Hard问题。</p>
+<hr>
+<h4><span id="2-sbs-caching-sbs缓存">2) SBS Caching    （SBS缓存）</span></h4><p>SBS缓存：SBS密集部署在下一代异构网络中。<br>因此，<strong>SBSs处的缓存是另一个不错的选择，因为SBSs距离终端用户更近，并且通常提供更高的数据速率。</strong><br>许多文献研究了SBSS[84]，[85]，[86]，[87]，[88]的缓存性能。</p>
+<hr>
+<h4><span id="3-device-caching-设备缓存">3) Device Caching    （设备缓存）</span></h4><p>设备缓存：<strong>D2D</strong>通信是下一代5G网络的关键技术之一。<br><strong>移动设备中的存储资源是可以利用的</strong>。<br>如果仔细设计缓存策略，在移动设备上缓存内容可以极大地提高用户的QOE。<br>文献[89]考虑了用户之间的社会关系和共同兴趣，提出了一种基于缓存的D2D通信方案。<br>在[90]中，提出了一种利用设备缓存能力的机会主义协作D2D传输方案。<br>在该方案中，将D2D用户分成簇，并在簇内的用户处缓存不同的热门文件。<br>实验结果表明，在热度分布不对称的情况下，与现有的D2D缓存方案相比，该策略可以提供5~6倍的吞吐量增益。</p>
+<hr>
+<h3><span id="4-b-content-popularity-内容热度">4-B. Content Popularity 内容热度</span></h3><p>在决定在边缘网络中缓存什么内容时，应该考虑内容的普及度来最大化缓存的命中概率，即用户请求的内容在边缘网络中被缓存的概率。</p>
+<h4><span id="1-static-model-静态模型">1) Static Model 静态模型</span></h4><p>静态模型：目前关于移动缓存的研究大多假设内容热度是静态的，采用<strong>独立参考模型(IRM</strong>)：<strong>内容请求</strong>是根据一个<strong>独立的泊松过程</strong>产生的，其比率与内容热度相关，采用幂律模型[91]。<br>常用的流行模型是在网络缓存中观察到的zipfmodel[92]。</p>
+<h4><span id="2-dynamic-model-动态模型">2) Dynamic Model  动态模型</span></h4><p><strong>动态模型：</strong>静态IRM模型不能反映时变的真实内容热度[91]。<br>动态流行度模型称为<strong>散粒噪声模型</strong>(SNM)，它是在[93]中提出的。<br>在[94]中，作者分析了<strong>用户生成内容</strong>(UGC)热度分布的统计特性，并讨论了利用长尾视频需求的机会。该模型使用两个参数对每个内容进行建模：持续时间反映内容的生命周期，高度反映内容的瞬时受欢迎程度。在[94]中，作者分析了<strong>用户生成内容(UGC)热度分布的统计特性</strong>，并讨论了<strong>利用长尾视频需求的机会</strong>。</p>
+<hr>
+<h3><span id="4-c-caching-policies-and-algorithms-缓存策略和算法">4-C. Caching Policies and Algorithms  缓存策略和算法</span></h3><p>在移动缓存中已经提出了各种缓存策略和算法。<br>对<strong>有线网络中一些传统的缓存策略进行了修改</strong>，使之适用于无线网络，并提出了<strong>基于学习的缓存策略</strong>和<strong>协作缓存策略</strong>等新的缓存策略。<br>文献[95]详细回顾了信息中心网络中传统的缓存策略和转发机制。<br>我们将在下面给出无线移动网络中的缓存策略的分类，如表VI.</p>
+<hr>
+<h4><span id="1conventional-caching-policies-传统的缓存策略">1)Conventional Caching Policies   传统的缓存策略</span></h4><p>内容替换策略，例如最不频繁使用(LFU)和最近最少使用(LRU)，已经在大量的高速缓存策略中被采用[95]、[96]。<br>这些策略对于<strong>大小一致的对象</strong>来说是简单而有效的。<br>但是，这些策略忽略了对象的<strong>下载延迟和大小</strong>。<br>在<strong>内容递送网络</strong>content deliver networks中使用的另一种主动缓存策略是MPV策略，其基于<strong>全球视频流行分布</strong>来缓存<strong>最受欢迎的视频[82]。</strong><br>然而，与CDN相比，<strong>RAN的缓存大小</strong>非常有限。<br>对于RAN缓存，MPV策略实现的命中概率<strong>可能过低。</strong></p>
+<hr>
+<h4><span id="2-user-preference-based-policies-基于用户偏好的策略">2) User Preference Based Policies  基于用户偏好的策略</span></h4><p>基于用户偏好的策略：在[82]中，作者提出了一种<strong>基于用户偏好模型</strong>(UPP)user preference profile的缓存策略，发现本地视频热度与全国视频热度有很大的不同，用户可能对<strong>特定的</strong>视频类别表现出强烈的偏好。<br>每个用户的UPP被定义为用户请求<strong>特定视频类别的视频的概率</strong>.</p>
+<hr>
+<h4><span id="3-learning-based-policies-基于学习的策略">3) Learning Based Policies  基于学习的策略</span></h4><p>基于学习的策略：事实上，内容的<strong>受欢迎程度</strong>是<strong>随时间变化的</strong>，事先是不知道的。<br>因此，对及时的<strong><u>内容热度进行跟踪和估计</u></strong>是一个重要的问题。<br>基于机器学习技术，文献[97]提出了基于学习的缓存策略。<br>作者在[97]中从<strong>强化学习的角度</strong>解决了SBSs中的分布式缓存问题。<br>通过<u>采用编码缓存</u>，将缓存问题归结为<u>考虑网络连通性的线性规划问题</u>，编码缓存方案的性能优于未编码缓存方案作者在[98]采用<u>基于Q学习</u>的策略解决缓存替换问题。</p>
+<hr>
+<h4><span id="4-non-cooperative-caching-非协作缓存">4) Non-Cooperative Caching  非协作缓存</span></h4><p>现有的一些缓存策略<u>决定每个基站缓存的内容</u>，没有考虑基站之间的协作，<u>不考虑协作</u>。<br>在[82]中，该方案基于特定小区内的UPP实际使用情况做出缓存决策，而不考虑其他小区内的缓存对缓存的影响。<br>在[98]中，缓存替换问题被建模为<u>马尔可夫决策</u>过程(MDP)，使用<u>Q-学习方法</u>以分布式的方式解决，而不需要在BS之间交换关于缓存数据的额外信息。<br>该策略优于传统的LFU、LRU和随机化策略</p>
+<hr>
+<h4><span id="5-cooperative-caching-协作缓存">5) Cooperative Caching 协作缓存</span></h4><p>在设计缓存策略时，很多已有的工作都研究了缓存位置之间的协作问题。</p>
+<p>在[99]中，为了最大化缓存服务的业务量和最小化带宽成本，提出了一种轻量级协作缓存管理算法；</p>
+<p>在[100]中，研究了<strong>毫微微基站</strong>femto base stations与用户设备(UE)之间的内容缓存和分发的协作问题。<br>将协同缓存问题描述为<u>整数线性规划问题</u>，并用<u>次梯度法求解。</u>内容分发策略被描述为一个<u>不平衡分配</u>问题，并使用Hungrian算法进行求解。</p>
+<p>在[101]中，作者探索了可伸缩视频编码(SVC)技术在小区间协同视频缓存和调度中的应用，以进一步提高缓存容量和用户服务质量；</p>
+<p>在[102]中，作者研究了RAN中缓存之间的协作，得出了<u><strong>每个基站缓存内容的最佳冗余率。</strong></u></p>
+<p>在[90]中，D2D用户之间的协作被用于启用高速缓存的D2D通信。</p>
+<p>文献[103]提出了一种基于网络编码的内容放置方法。<br>该策略增加了用户可用的数据量，同时实现了数据的公平分布。<br>在[88]中，作者联合设计了缓存和路由方案，以最大化小小区基站在BS带宽约束下所服务的内容请求。<br>该问题归结为<strong>设施选址问题</strong>，并使用<strong>有界近似算法</strong>求解。</p>
+<hr>
+<h3><span id="4-d-caching-of-different-file-types-不同文件类型的缓存">4-D. Caching of Different File Types   不同文件类型的缓存</span></h3><p>用于缓存的最常见文件类型是多媒体文件，例如流行的视频和音频文件。物联网是下一代5G网络的主要用例之一，因此随着IoT数据量的增加以及与多媒体数据相比物联网数据具有不同的特性，物联网数据的缓存也很重要。</p>
+<p>1）<strong>大型数据文件或多媒体数据</strong>：现有的大多数文献[82]，[94]，[101]中都研究了<strong>大型多媒体数据</strong>特别是视频文件的缓存设计。多媒体数据的特点是许多用户对它们有相同的兴趣热门视频。因此，在RAN中缓存受欢迎的文件可以<strong>从高命中率中受益。</strong></p>
+<p>2）<strong>IoT数据：</strong>运行在数十亿台设备上的物联网应用程序生成的低速率监控、测量和自动化数据需要缓存以减少总流量负载。然而，<u>物联网数据与多媒体数据的不同之处</u>在于，<u>物联网数据</u>具有<strong>较短的生命周期</strong>。因此，需要不同的缓存策略。</p>
+<p>在[104]中，作者提出了一个<strong>既考虑通信成本又考虑瞬时物联网数据项新鲜度的模型</strong>。网络负载可以显著降低，特别是对于<strong>高请求的数据。</strong></p>
+<hr>
+<h3><span id="4-e-mobility-awareness-移动意识">4-E. Mobility Awareness 移动意识</span></h3><p><u><strong>用户移动性</strong></u>是无线网络的一项独特功能，因此在网络边缘进行缓存时应考虑这一点。在此问题上已经做了很多工作。</p>
+<p>[105]的作者提出了一种<u>以内容为中心的无线网络</u>中的移动感知缓存的通用框架。对用户移动性的时空特性都进行了建模。</p>
+<p>在[106]中，考虑了<u>用户的移动性模式，</u><u>并且将移动性感知缓存问题表述为旨在最大化缓存效用的优化问题</u>，并且作者提出了<u>多项式时间启发式</u>解决方案来解决该问题。</p>
+<p>在[107]中分析了<strong>用户移动性</strong>对边缘缓存<strong>命中性能</strong>的影响。</p>
+<p>在[108]中，将用户移动性建模为<u>离散时间马尔可夫链</u>。作者考虑了一种场景，其中<strong>已编码内容文件</strong>的段存储在具有主基站初始化的小区中的一组基站中。缓存算法旨在最大程度地减少使用<u>主基站进行文件传输的可能性。</u></p>
+<p>与假定用户移动性之前的工作不同, 在[109]中，<u>当用户移动性未知时</u>，基于移动性预测算法研究切换用户的内容服务的连续性。</p>
+<p> 在[110]中，作者利用以信息为中心的网络和移动Follow-MeCloud方法来<u>增强位于移动网络边缘的内容缓存的迁移</u>。与现有解决方案相比，所提出的contentrelocation算法可将内容可用性提高多达500％。</p>
+<hr>
+<h3><span id="4-f-impact-on-system-performance-对系统性能的影响">4-F. Impact on System Performance 对系统性能的影响</span></h3><p>1）<u><strong>Capacity容量</strong></u>：有关边缘缓存的现有工作已证明，在<strong>网络边缘进行缓存可以显着提高系统容量</strong>。例如，在[82]中提出的解决方案与<strong>RAN中</strong>没有缓存相比，可以将容量提高3倍。</p>
+<p>2）<u><strong>Delay 延迟</strong></u>：由于缓存与最终用户的接近，在网络边缘进行缓存可以显著<strong>减少内容传递延迟</strong>。在[82]中，通过联合调度<strong>RAN backhaul</strong>和<strong>无线信道</strong>来减少视频会话的初始延迟和停顿，因此提高了视频QoE。在[111]中，推导了<strong>交付延迟与前传资源</strong>之间的权衡tradeoff折中。</p>
+<p>3）<u><strong>Spectral Efficiency 频谱效率</strong></u>：在[112]中，作者使用<u>随机几何理论</u>将启用缓存的2层HetNet与传统的没有缓存的HetNet进行了比较。数值结果表明，与没有缓存的微微BS密度相比，启用缓存的助手密度cashe-enabled helper density可以降低3/4，以实现相同的区域频谱效率（ASE）。<u>给定一个区域内的总容量，存在一个最佳的启用缓存的SBS密度，该密度可最大化ASE。</u></p>
+<p>4）<u><strong>Energy Efficiency 能源效率</strong></u>：<strong>能源效率</strong>是下一代5G网络的另一个重要性能指标。</p>
+<p>在[113]中，分析了缓存对BS的影响时的<strong>下行网络的能量效率</strong>。结果表明，<u>当文件目录大小较小且在多个微小BS处进行缓存比在宏BS处进行缓存时，</u>能源效率将得到提高。</p>
+<p>在[114]中，展示了在<strong>软件定义的异构网络中</strong>，能源效率和小单元密度之间的基本权衡。<strong>启用缓存的异构网络</strong>的能源效率远高于当前的<strong>LTE网络</strong></p>
+<hr>
+<h2><span id="advances-in-communication-techniques-with-synergy-of-computing-and-caching">Advances in Communication Techniques with Synergy of Computing and Caching</span></h2><p>利用计算机的协作和进取来推进通信技术</p>
+<p><strong>计算和缓存资源与通信系统的</strong>结合将在很大程度上改变通信网络的设计理念。5G与MEC的结合将使某些跨域和跨域使用案例变得可行，例如汽车服务和电子医疗服务[50]。通过协调集群中启用云的小型cell，可以在<strong>通信网络内部</strong>创建<strong>分布式光数据中心[</strong>115]，[51]。在本节中，我们将讨论通信技术以及通信，计算和缓存的协同作用。</p>
+<h3><span id="a-mmwave-communication-毫米波通信">A. mmWave Communication (毫米波通信)</span></h3><p>在未来的网络中使用<strong>毫米波频谱</strong>可以实现高数据速率传输。</p>
+<p>整合5G的各种方案已经提出了具有传统蜂窝网络的BS，例如独立的毫米波系统以及毫米波BS和4G BS的混合系统[34]。毫米波频谱主要用于<strong>数据通信</strong>。<strong>毫米波基站所使用的<u>窄波束</u></strong>可以提高基站与大量用户之间的链路质量。</p>
+<p>但是，这种部署方式也带来了新的挑战，即<strong>连接持续时间短</strong>和<strong>高移动性用户</strong>的频繁切换，使视频流遭受长时间延迟的困扰。[116]中的作者提出了一种基于缓存的mm-wave框架，该框架在BS处为切换用户预缓存内容。所提出的解决方案可以为5G毫米波小型小区中的高移动性用户提供一致的高质量视频流。</p>
+<h3><span id="b-d2d-communication-d2d通信">B. D2D Communication (D2D通信)</span></h3><p>D2D通信可实现附近的终端设备之间的直接传输。它被公认为5G网络的主要技术之一。</p>
+<p><strong><u>使用D2D通信的优点包括单跳通信，更高的频谱效率，更低的传输功率，覆盖范围扩展和频谱重用</u></strong>[117]，[118]。另外，<u>借助D2D通信，可以将大型MTC设备<strong>从MBS卸载到SBS</strong></u>，从而提高了整体网络容量并避免了MBS的流量拥塞[119]。</p>
+<p>许多以前的D2D通信研究都集中在频谱复用，对等发现，功率控制，连接建立和干扰管理[120]，[121]。利用边缘缓存和计算的概念，在大量智能设备上使用计算和存储资源引起了研究人员的注意。许多研究人员正在研究通过D2D通信进行的计算分流和内容共享问题[62]，[89]，[90]</p>
+<h3><span id="c-transmission-schemes-传输方案">C. Transmission Schemes (传输方案)</span></h3><p><strong><u>普遍部署的低成本缓存促进了以内容为中心的传输的发展</u></strong>。移动网络中的这些缓存将内容移动到最终用户附近。</p>
+<p>但是，如何提高小型蜂窝中小型缓存的有效性是一个挑战。由于缓存的内容对于本地用户而言很受欢迎，因此对同一文件的某些请求可能会在附近发生。因此，<u>可以通过<strong>单个多播传输</strong>来保留这些请求[87]。</u>与使用单播传输的缓存方案相比，支持多播的方案可以将成本降低多达88％。当所请求的内容在某些时隙中都不同时，可以采用交织的传输方案来平衡每个SBs的顺序时隙的流量[122]。</p>
+<h3><span id="d-interference-management-干扰管理">D. Interference Management (干扰管理)</span></h3><p>在未来的超密集异构网络中，干扰是一个关键挑战。小型小区网络干扰管理的潜在技术之一是干扰队列alignment（IA）。在[122]中，作者研究了利用缓存和计算技术开发的以内容为中心的通信的IA问题。<strong>利用以内容为中心的缓存原理，简化了干扰网络的拓扑结构，简化了干扰管理</strong>。由于云计算平台的高计算能力，IA的解决方案可以轻松计算。所提出的框架减少了回程负载和CSI反馈的开销，同时提高了吞吐量。</p>
+<h3><span id="e-communication-resources-allocation-and-scheduling通信资源分配和安排">E. Communication Resources Allocation and Scheduling(通信资源分配和安排)</span></h3><p>随着通信系统中缓存和计算资源的集成，通信资源的分配和调度与传统网络有所不同。<u>除了缓存放置之外，通信资源的调度也影响缓存的效率</u>。在[82]中，视频感知回程调度和缓存的联合设计可以将容量提高到比传统策略高50％以上。</p>
+<p>当无线信道带宽受到限制时，对<u>无线信道调度的精心设计会导致明显更高的视频容量。</u></p>
+<p>在[101]中研究了<u><strong>结合协作缓存和SVC</strong></u>的联合缓存和视频计划策略。</p>
+<h3><span id="f-synergy-of-communication-computing-and-caching通讯计算和缓存的协同作用">F. Synergy of Communication, Computing and Caching(通讯，计算和缓存的协同作用)</span></h3><p>通过使<strong><u>移动网络具有更高的计算能力，可以节省稀缺的通信资源</u></strong>。在[123]中，提出了一种内容瘦身系统，该系统可以检测冗余视频内容并通过计算从原始帧中裁剪出来，仅<u>发送必要的视频内容</u>。与H.264相比，该方案可将传输带宽消耗至少降低50％，而不会牺牲视频质量和视觉体验。</p>
+<p><u><strong>应用类型，用户移动性和通信资源将影响部署计算和缓存资源的最佳位置[124]</strong></u>。</p>
+<p>对于需要计算任务的低带宽，高持久性用例，由于毫微微小区的频繁切换和低计算能力，不应在<strong>毫微微小区部署计算资源，尤其是在回程传输延迟最小的情况下。</strong></p>
+<p>对于高带宽位置限制服务需要存储资源（例如AR），则应将计算和缓存资源部署在尽可能靠近最终用户的位置。总之，应根据<strong>服务类型利用部署在网络不同层上的计算和缓存资源，并考虑回程容量。</strong></p>
+<hr>
+<h2><span id="applications-and-usecase">Applications and Usecase</span></h2><p>新的应用是网络架构发展的主要动力。新兴应用程序对数据速率，等待时间等的要求越来越严格。在本节中，我们将总结移动边缘网络中的应用程序和用例，如表VII所示。</p>
+<h3><span id="a-dynamic-content-delivery-动态内容交付">A. Dynamic Content Delivery 动态内容交付</span></h3><p>随着多媒体内容需求的增加，回程链路backhaul在传统的集中式网络体系结构中面临拥塞问题。<u><strong>缓存边缘网络</strong></u>可以基于<u>网络状态信息和用户的上下文感知信息</u>来提供<strong>动态内容交付</strong>[19]，[125]。由于内容放置在靠近移动用户的位置，因此移动用户的QoE有了显着提高。</p>
+<h3><span id="b-augmented-realityvirtual-reality-增强现实虚拟现实">B. Augmented Reality/Virtual Reality 增强现实/虚拟现实</span></h3><p>增强现实（AR）和虚拟现实（VR）技术被视为将改变我们生活方式的最有前途的应用程序。此应用程序需要用户状态的实时信息，例如用户所面对的位置和方向。MEC服务器能够利用本地上下文信息并具有强大的处理能力，非常适合AP / VR应用[126] 。</p>
+<h3><span id="c-intensive-computation-assistance-密集计算辅助">C. Intensive computation assistance 密集计算辅助</span></h3><p>为了降低设备成本，通常会牺牲计算能力。因此，对于具有大量计算任务的此类应用，需要非常低的处理时间和低等待时间的计算分载是必要的。<strong>MEC服务器具有很高的计算能力，并且可以在很短的时间内处理卸载的计算任务</strong>。而且，MEC服务器可以从多个来源收集信息，这有助于那些设备执行需要来自多个来源的信息的任务[126]。</p>
+<h3><span id="d-video-streaming-and-analysis-视频流和分析">D. Video Streaming and Analysis 视频流和分析</span></h3><p>据观察，视频流量占当前网络中全部移动数据流量的一半以上，并且这一百分比仍在增加。<strong>*<u>边缘缓存</u>*</strong> 的采用避免了许多冗余视频流通过<u><strong>核心网络传输到Internet CDN</strong></u>。在网络边缘的功能更强大的云平台上而不是在产生视频的源上使用MEC服务器允许视频分析[126]，[127]。</p>
+<h3><span id="f-connected-vehicles-互联车辆">F. Connected Vehicles 互联车辆</span></h3><p>边缘计算方法可以在互联车辆，V2X通信和汽车安全服务中发挥重要作用，例如高速公路上的积冰实时预警和协调的换道操作[36]。<u>运行在MEC服务器上的应用程序</u>紧邻车辆，并可以提供低延迟的路边功能[130]。由于<strong>边缘网络</strong>能够从<u>无处不在的传感器设备中收集和分析实时数据</u>，因此可以实现交通控制和智能停车[19]。</p>
+<h3><span id="g-cognitive-assistance-认知援助">G. Cognitive Assistance 认知援助</span></h3><p>认知援助应用程序用于增强人类的感知和认知能力。[136]中的作者演示了cloudlet如何在该cloudlet中提供帮助只是一个<strong>无线跳远</strong>的云代理。</p>
+<p>因此，它是认知辅助的理想选择。所有对<strong>延迟敏感的处理任务</strong>都被卸载到用户设备<strong>关联的cloudlet中</strong>。<strong>当用户从一个小云的附近移开时，将使用移交给附近的另一个小云。</strong></p>
+<h3><span id="h-wireless-big-data-analysis-无线大数据分析">H. Wireless Big Data Analysis 无线大数据分析</span></h3><p>大数据通常从三个维度进行表征：<strong>容量，速度和多样性</strong>。[37]中的作者建议地理分布是表征大数据的第四维度。例如，大量传感器和执行器自然分布。</p>
+<p>雾计算作为管理分布式网络，计算和存储资源的分布式智能平台，是处理这些大数据的有前途的选择。与在核心网络上执行的大数据分析相比，在网络边缘进行大数据分析将减少带宽消耗和网络延迟[19]。</p>
+<h2><span id="key-enables">Key Enables</span></h2><p>在本节中，将介绍使移动边缘网络的概念成为现实的关键技术。这些技术为移动边缘网络提供了灵活性，可扩展性和运营效率。</p>
+<h3><span id="a-cloud-technology-云技术">A. Cloud Technology 云技术</span></h3><p>移动边缘网络的概念是将云计算功能扩展到移动网络的边缘。云技术的进步使在诸如基站和网关之类的大容量通用服务器上部署虚拟机更加容易[19]。云可以提供强大的处理能力和大量资源。事实证明，云和物联网的集成有助于交付新服务[137]。移动边缘网络与云计算功能集成在一起，并为服务管理和提供提供有效的解决方案。</p>
+<h3><span id="b-software-defined-network-软件定义的网络">B. Software Defined Network 软件定义的网络</span></h3><p>SDN技术使网络变得智能，可编程且更加开放[138]。SDN的主要思想是将<strong>控制平面和数据平面分开</strong>。SDN的优势包括在通用硬件上创建网络控制平面，通过API公开网络功能，远程控制网络设备以及将网络智能逻辑地分离到不同的基于软件的控制器中[138]。</p>
+<p>SDN技术克服了大规模管理复杂性的缺点服务器和应用程序的部署[139]。</p>
+<p>SDN规范的应用将使MEC平台所需的不同级别的管理成为可能[140]。</p>
+<h3><span id="c-network-function-virtualization-网络功能虚拟化">C. Network Function Virtualization 网络功能虚拟化</span></h3><p>网络功能虚拟化（NFV）是为未来5G网络提出的SDN的一项补充技术。</p>
+<p>NFV的目的是通过使用<strong>软件技术</strong>将<strong>一组网络功能从专用硬件移动到通用计算平台来虚拟化一组网络功能</strong>，<strong>从而可以提供与传统移动网络相同的服务。</strong>结果，管理大型异构设备的能力得到了提高。以及网络的可扩展性和灵活性[5]。</p>
+<p>若使用NFV，网络运营商的资本支出（CAPEX）和运营支出（OPEX）都有可能减少。</p>
+<p><strong>网络虚拟化导致虚拟网络嵌</strong>入（VNE）问题，目前正在研究VNE算法[141]。NFV的应用改变了电信行业的面貌，并带来了许多好处，例如缩短了上市时间，近乎实时地优化网络配置和拓扑以及支持多租户[142]。</p>
+<h3><span id="d-smarter-mobile-devices-更智能的移动设备">D. Smarter Mobile Devices 更智能的移动设备</span></h3><p>在传统的蜂窝网络一代（2G，3G，4G）中，系统设计的方向是在网络基础架构方面进行完全控制。但是，随着移动设备变得越来越强大和智能，这种设计理念应该改变为在设备侧利用智能[35]。在未来的网络中，设备将以更智能的方式发挥更积极的作用。<strong><u>D2D通信是一项重要技术。</u></strong>在当前网络中，数据流量已成为语音的主要流量类型，已不再是语音。</p>
+<p>在许多情况下，附近的设备想共享内容或彼此交互，例如游戏和社交网络。直接D2D通信可以从多个方面提高网络效率。首先，它节省了大量信令资源，减少了传输延迟；</p>
+<p>其次，<strong>与借助基站进行传输相比，它可以节省大量能量</strong>。此外，由于到设备通信的路径损耗比BS低得多，因此可以<strong>提高频谱效率。</strong>预计D2D通信将在5G networking中获得本地支持。另一种有用的技术是本地缓存，旨在在数据存储和数据传输之间取得平衡。对于无线设备，信息的边际成本不可忽略。由于当今的移动设备中安装了越来越多的存储单元，因此在设备上缓存诸如视频或音频文件之类的流行内容显然比通过单播重复传输此类内容更便宜，而且效率更高，因为需求是异步的。</p>
+<h2><span id="open-challenges-and-future-directions">Open Challenges and Future Directions</span></h2><p>移动边缘网络是一种在移动网络中的一种革命。<br>它具有许多新特性，使得现有的3g/4g蜂窝系统具有更好的性能和灵活性。<br>因此，本文对未来研究有着广泛的应用前景和机遇，本文指出了当前边缘网络面临的主要开放挑战，并揭示了可能的非边界方向。</p>
+<h3><span id="a-open-research-challenges-开放研究挑战">A. Open Research Challenges 开放研究挑战</span></h3><p>下一代电力系统的严格要求，如超高吞吐量、极低的节能、高能效等，对学术界和工业界都面临着巨大挑战。<br>我们总结了与下面移动边缘网络相关的研究问题：</p>
+<h4><span id="1-heterogeneity-异质性">1)  Heterogeneity 异质性</span></h4><p>在未来的网络中，随着物联网技术和物联网应用的发展，异构、通信、设备等异构性成为了一种新的技术。这种异质性导致其他相关问题，例如异步和非正交[34]。在统一的决策过程中，处理这种异质性的决策需要充分地研究。</p>
+<h4><span id="2-computation-modeling-计算建模">2)  Computation Modeling 计算建模</span></h4><p>为了验证分析和仿真工作的准确性，计算资源的模型必须准确。目前的文献中,计算资源建模为CPU周期每秒的[66]。虽然该模型分析简单，但是否充分反映了计算的特点仍是一个问题。因此，需要建立更精确的计算模型。</p>
+<h4><span id="3-enabling-realtime-analytics-启用实时分析">3)  Enabling Realtime Analytics 启用实时分析</span></h4><p>支持实时分析:很多新应用都需要实时分析，比如VR/AR和e-Health。动态资源管理应该确定将分析任务调度到保证延迟和吞吐量的最合适的边缘服务器[132]。</p>
+<h4><span id="4-user-mobility-用户移动型">4)  User Mobility 用户移动型</span></h4><p>用户移动性是移动边缘网络的一个关键挑战。它对缓存和计算卸载决策有不可忽视的影响。用户的频繁移动性会导致边缘服务器之间的频繁切换，应该实现同时<strong>考虑水平和垂直移动性</strong>的移动性管理技术，允许用户无缝地访问边缘服务器[19]。</p>
+<h4><span id="5-pricing-policy-定价策略">5)  Pricing Policy 定价策略</span></h4><p>在移动边缘网络中，存储、计算和通信资源是根据用户需求动态分配的。因此，最优定价策略不同于遗留系统。从商业的角度来看，系统中所有利益相关者的利益应该得到平衡。当用户非常关注价格时，边缘云的利润受到定价策略的显著影响[143]。文献[144]从博弈论的角度阐明了视频缓存系统的定价和资源分配问题。</p>
+<h4><span id="6scalability-可扩展性">6）scalability 可扩展性</span></h4><p>可伸缩性是与遗留系统相比，mo网络提供的一个重要特性，如物联网，越来越多的移动设备需要通过应用负载平衡机制[19]来扩展服务。一个灵活的边缘节点可以提供网络可扩展性[145]的云子空间。</p>
+<h4><span id="7-security-安全">7） Security 安全</span></h4><p>边缘云服务器的部署由于对移动设备信息的利用而带来了新的安全挑战[146]。安全解决方案的发展速度无法跟上新的安全挑战的步伐。</p>
+<p>许多现有的安全协议都使用全连接[147]，这在移动电子商务网络中并不现实，<strong>因为许多链路在违约</strong>。阿德芬斯这项技术是在[146]中针对恶意节点移动边缘计算平台HoneyBot提出的。</p>
+<p><strong>Honeybot节点可以检测、跟踪和隔离D2D内部攻击。</strong>这种技术的速度和精度受到Honeybot的位置和数量的影响节点云计算的安全解决方案可能不适合,对于边缘计算，因为边缘设备的工作环境将面临许多不同于管理良好的云的新威胁[148]。</p>
+<p><strong>网关和智能电表不同级别的认证是另一个重要的安全问题。</strong>针对身份认证问题，已经提出了一些解决方案，如基于公钥基础设施（PKI）的解决方案[149]、基于Diffie-Hellman密钥交换的解决方案[150]，光纤陀螺计算也需要入侵检测技术。针对不同的ent应用，已经提出了一些检测方法[148]。</p>
+<p>例如，基于签名的方法<strong>观察行为模式，并根据数据库检查可能的错误行为。</strong></p>
+<p>基于异常的入侵检测方法通过<strong>比较观察到的行为和预期的行为来检查偏差。</strong></p>
+<h4><span id="8privacy">8）Privacy</span></h4><p>隐私问题处理隐藏细节。<br>用户间的共享和计算合作，使得用户之间的隐私受到了关注。<br>如何利用移动设备的资源，而无需使用隐私仍然是一个挑战。<br>在典型的用例中，智能网格、智能电表数据的加密以及聚集结果在雾中的数据隐私。<br>原始数据只能在操作中心上运行[151]。<br>此外，还开发了许多数据管理器，用于mcc在协作移动设备之间执行privacypolicies和对一组客户端的重新配置[24]。</p>
+<p>这些机制使得移动边缘网络中协作式网络中心的隐私机制设计成为现实。<br>大多数的私有现存解决方案只需要<strong>一个可信平台模块(Tpm)，它可以部署在边缘数据中，</strong>比如个人网络、用户、用户和边缘数据中心之间的关系。因此，隐私助手实体可以在边缘数据中心中进行操作[24]。<br>在这些多用户添加中可以实现各种数据的交换和服务，边缘范式有助于增强某些服务的非用户特性。<br>例如，基于位置服务的用户可以被保护，从而可以在可信边缘服务器[152]中保护一个用户访问平台。</p>
+<h4><span id="9user-participation">9）User Participation</span></h4><p>用户参与：<strong>移动边缘网工程中的一个主要思想，就是给用户提供利用用户终端的有效资源的机会。</strong><br>使用工具可以通过工具包来增强用户的能力，用户在技术设计[137]中发挥了积极作用。用户之间的合作依赖于用户参与。<br>设计计算卸载策略时，需要考虑用户激励机制[64]。</p>
+<hr>
+<h3><span id="b-discussions-on-future-directions">B. Discussions on Future Directions</span></h3><h4><span id="1-utilization-of-wireless-big-data-无线大数据的利用">1) Utilization of Wireless Big Data 无线大数据的利用</span></h4><p>移动边缘网络中产生的无线网络是对网络进行分析和设计的一个重要组成部分。<br>Context aware方法还需要对大量的信息数据进行分析。<br>例如，用户信息big data可以用于边缘caching systems[153]中的卸载估计。<br>因此，无线大用户的充分利用为电子邮件的性能提供了新的机会。</p>
+<h4><span id="2-online-caching-在线缓存">2) Online Caching 在线缓存</span></h4><p>缓存问题包括：缓存放置和内容传递。<br>在放置阶段中，缓存更新已经完成了许多操作。<br>然而，在交付阶段，即在线缓存时，更高效的缓存更新规则是未来的研究方向[154]。</p>
+<h4><span id="3-context-awareness上下文感知">3) Context Awareness上下文感知</span></h4><p>移动边缘网络是利用上下文信息进行开发的工具。<br>诸如用户位置、其他用户、环境中的资源以及环境中的资源等非用户信息[155]。<br>实时上下文感知应用程序可以在MEC平台[50]中实现。<br>不同的上下文信息(应用程序、网络和设备级别)可以用来主动地分配资源[156]。</p>
+<h4><span id="4smart-user-association-智能用户协会">4）Smart User Association 智能用户协会</span></h4><p>在缓存启用超缓存中，缓存可能改变用户关联的方式，即传统的最近距离或基于SINR的方法[157]。<br>用户可能与bs关联，它缓存了它所要求的缓存。<br>这样，最近的bs可能会对用户进行干扰。<br>缓存感知用户associationmay克服了回程容量限制和enhanceusers‘QoE[158]。<br>可以有多个用户，用户将选择最佳访问模式(159)</p>
+<h4><span id="5-integration-集成">5) Integration 集成</span></h4><p>各种资源中移动边缘的networks 体系结构：计算、存储和集成。<br>这些资源的高效集成将使所有用户和用户都能获得最佳性能，并没有得出结论。<br>需要进一步开发更全面的资源管理。<br>网络演进与本课题的研究</p>
+<h2><span id="conclusion">Conclusion</span></h2><p>​    本文概述并总结了在移动边缘网络上的研究成果，移动边缘网络是计算，缓存和通信资源的范式集成。提出了用于边缘计算和缓存的拟议架构，包括ETSI MEC，雾计算，Cloudlet和边缘缓存。</p>
+<p>​    分别讨论了计算，缓存和通信的相关问题。对于边缘计算计算，对所提出的计算卸载进行了广泛的调查和分类。提出了边缘与核心之间的合作问题以及一些现有的边缘计算平台。</p>
+<p>​    对于边缘缓存，我们对缓存的位置，内容和方式进行了详细的分类。然后讨论了通信技术的进步以及与计算和缓存的协同作用。</p>
+<p>​    新颖的应用和用例是移动边缘网络架构的驱动力。我们总结了这些应用程序，并使用了移动边缘网络可以启用的情况。这种新的范式面临许多挑战和机遇。指出了这一热点话题的未来研究方向。</p>
+<hr>
+<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7883826" target="_blank" rel="noopener"> 论文地址 </a></p>
+
+    </div>
+
+    
+    
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------感谢您的阅读(Thanks for your reading)-------------</div>
+    
+</div>
+
+  
+</div>
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Survey/" rel="tag"># Survey</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/23/Mobile%20edge%20computing%E2%80%94A%20key%20technology%20towards%205G/" rel="prev" title="Mobile edge computing—A key technology towards 5G 白皮书阅读">
+      <i class="fa fa-chevron-left"></i> Mobile edge computing—A key technology towards 5G 白皮书阅读
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">1.1 本文的主要贡献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">1.2 本文的其余部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Overview of Mobile Edge Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">A. What is Mobile Edge Networks？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.2.</span> <span class="nav-text">B. Architecture of Mobile Edge Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">4.2.1.</span> <span class="nav-text">B-1 移动边缘计算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">Backhaul</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">4.2.1.3.</span> <span class="nav-text">CDN基础架构：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">4.2.2.</span> <span class="nav-text">B-2 雾计算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">4.2.3.</span> <span class="nav-text">B-3 微云Cloudlet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">4.2.4.</span> <span class="nav-text">B-4 边缘缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">4.2.5.</span> <span class="nav-text">B-5 总结对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.3.</span> <span class="nav-text">C. Advantages of Mobile Edge Networks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">Computing at Mobile Edge Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">3-A Objective</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.1.1.</span> <span class="nav-text">1) 能耗最小化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.1.2.</span> <span class="nav-text">2)最大限度地提高容量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.1.3.</span> <span class="nav-text">3)最小化时延</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.1.4.</span> <span class="nav-text">知识小补充：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.2.</span> <span class="nav-text">3-B Computation Offloading</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.2.1.</span> <span class="nav-text">1） 单用户情况 singlei User Case</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.2.2.</span> <span class="nav-text">2） 多用户情况 Multi-user Case</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.2.3.</span> <span class="nav-text">3） 卸载到MEC服务器   Offloaded to MEC Server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.2.4.</span> <span class="nav-text">4） 卸载到设备 Offloaded to devices</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.2.5.</span> <span class="nav-text">5） Mobility Awareness 移动性意识</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.3.</span> <span class="nav-text">3-C Cooperation between the edge and the core</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.4.</span> <span class="nav-text">4-D Platforms</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text">Caching at Mobile Edge Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.1.</span> <span class="nav-text">4-A Cashing Places 缓存的位置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.1.1.</span> <span class="nav-text">1) MBS Caching    （MBS缓存）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.1.2.</span> <span class="nav-text">2) SBS Caching    （SBS缓存）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.1.3.</span> <span class="nav-text">3) Device Caching    （设备缓存）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.2.</span> <span class="nav-text">4-B. Content Popularity 内容热度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.2.1.</span> <span class="nav-text">1) Static Model 静态模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.2.2.</span> <span class="nav-text">2) Dynamic Model  动态模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.3.</span> <span class="nav-text">4-C. Caching Policies and Algorithms  缓存策略和算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.3.1.</span> <span class="nav-text">1)Conventional Caching Policies   传统的缓存策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.3.2.</span> <span class="nav-text">2) User Preference Based Policies  基于用户偏好的策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.3.3.</span> <span class="nav-text">3) Learning Based Policies  基于学习的策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.3.4.</span> <span class="nav-text">4) Non-Cooperative Caching  非协作缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.3.5.</span> <span class="nav-text">5) Cooperative Caching 协作缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.4.</span> <span class="nav-text">4-D. Caching of Different File Types   不同文件类型的缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.5.</span> <span class="nav-text">4-E. Mobility Awareness 移动意识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.6.</span> <span class="nav-text">4-F. Impact on System Performance 对系统性能的影响</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">7.</span> <span class="nav-text">Advances in Communication Techniques with Synergy of Computing and Caching</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">7.1.</span> <span class="nav-text">A. mmWave Communication (毫米波通信)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">7.2.</span> <span class="nav-text">B. D2D Communication (D2D通信)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">7.3.</span> <span class="nav-text">C. Transmission Schemes (传输方案)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">7.4.</span> <span class="nav-text">D. Interference Management (干扰管理)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">7.5.</span> <span class="nav-text">E. Communication Resources Allocation and Scheduling(通信资源分配和安排)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">7.6.</span> <span class="nav-text">F. Synergy of Communication, Computing and Caching(通讯，计算和缓存的协同作用)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">8.</span> <span class="nav-text">Applications and Usecase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">8.1.</span> <span class="nav-text">A. Dynamic Content Delivery 动态内容交付</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">8.2.</span> <span class="nav-text">B. Augmented Reality&#x2F;Virtual Reality 增强现实&#x2F;虚拟现实</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">8.3.</span> <span class="nav-text">C. Intensive computation assistance 密集计算辅助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">8.4.</span> <span class="nav-text">D. Video Streaming and Analysis 视频流和分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">8.5.</span> <span class="nav-text">F. Connected Vehicles 互联车辆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">8.6.</span> <span class="nav-text">G. Cognitive Assistance 认知援助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">8.7.</span> <span class="nav-text">H. Wireless Big Data Analysis 无线大数据分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">9.</span> <span class="nav-text">Key Enables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">9.1.</span> <span class="nav-text">A. Cloud Technology 云技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">9.2.</span> <span class="nav-text">B. Software Defined Network 软件定义的网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">9.3.</span> <span class="nav-text">C. Network Function Virtualization 网络功能虚拟化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">9.4.</span> <span class="nav-text">D. Smarter Mobile Devices 更智能的移动设备</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">10.</span> <span class="nav-text">Open Challenges and Future Directions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">10.1.</span> <span class="nav-text">A. Open Research Challenges 开放研究挑战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.1.1.</span> <span class="nav-text">1)  Heterogeneity 异质性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.1.2.</span> <span class="nav-text">2)  Computation Modeling 计算建模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.1.3.</span> <span class="nav-text">3)  Enabling Realtime Analytics 启用实时分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.1.4.</span> <span class="nav-text">4)  User Mobility 用户移动型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.1.5.</span> <span class="nav-text">5)  Pricing Policy 定价策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.1.6.</span> <span class="nav-text">6）scalability 可扩展性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.1.7.</span> <span class="nav-text">7） Security 安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.1.8.</span> <span class="nav-text">8）Privacy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.1.9.</span> <span class="nav-text">9）User Participation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">10.2.</span> <span class="nav-text">B. Discussions on Future Directions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.2.1.</span> <span class="nav-text">1) Utilization of Wireless Big Data 无线大数据的利用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.2.2.</span> <span class="nav-text">2) Online Caching 在线缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.2.3.</span> <span class="nav-text">3) Context Awareness上下文感知</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.2.4.</span> <span class="nav-text">4）Smart User Association 智能用户协会</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">10.2.5.</span> <span class="nav-text">5) Integration 集成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">11.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael Fu"
+      src="/images/cute.png">
+  <p class="site-author-name" itemprop="name">Michael Fu</p>
+  <div class="site-description" itemprop="description">Jack of all trades and master of none</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MIchaelFU0403" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;MIchaelFU0403" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1078537664@qq.com" title="E-Mail → mailto:1078537664@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+      <div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=4976228673&auto=1&height=32"></iframe>
+      </div>
+    </div>
+  </aside>
+
+
+
+      </div>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Michael Fu</span>
+<br/>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+</div>
+</div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共37.6k字（Blog totally contains 37.6k letters）</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'Ys2KzcruFgbcketOAFvXprcb-gzGzoHsz',
+      appKey: 'hLIsH24X1KdXFWAe7FPzpOw8',
+      placeholder: "enjoy yourself（畅所欲言！！！)",
+      avatar: 'identicon',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+
+
+<script type="text/javascript"
+color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
