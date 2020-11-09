@@ -434,6 +434,184 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://michaelfu0403.github.io/2020/11/03/MEC-%E7%9B%B8%E5%85%B3%E9%80%9A%E4%BF%A1%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cute.png">
+      <meta itemprop="name" content="Michael Fu">
+      <meta itemprop="description" content="Jack of all trades and master of none">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/03/MEC-%E7%9B%B8%E5%85%B3%E9%80%9A%E4%BF%A1%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">MEC-相关通信网络基本概念</a>
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-03 09:05:21" itemprop="dateCreated datePublished" datetime="2020-11-03T09:05:21+08:00">2020-11-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-09 15:30:53" itemprop="dateModified" datetime="2020-11-09T15:30:53+08:00">2020-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A0%E7%BA%BF%E9%80%9A%E4%BF%A1%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">无线通信网络</span></a>
+                </span>
+            </span>
+
+          
+          <span id="/2020/11/03/MEC-%E7%9B%B8%E5%85%B3%E9%80%9A%E4%BF%A1%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-meta-item leancloud_visitors" data-flag-title="MEC-相关通信网络基本概念" title="阅读热度">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-eye"></i>
+            </span>
+            <span class="post-meta-item-text">阅读热度：</span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/11/03/MEC-%E7%9B%B8%E5%85%B3%E9%80%9A%E4%BF%A1%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/03/MEC-%E7%9B%B8%E5%85%B3%E9%80%9A%E4%BF%A1%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3><span id="目录">目录</span></h3><!-- toc -->
+
+<ul>
+<li><a href="#ran">RAN</a></li>
+<li><a href="#sla">SLA</a></li>
+<li><a href="#核心网">核心网</a></li>
+<li><a href="#公用网">公用网</a></li>
+<li><a href="#信令系统signalling-systems">信令系统（signalling systems）</a></li>
+<li><a href="#c-ran">C-RAN</a></li>
+<li><a href="#回程链路">回程链路</a></li>
+<li><a href="#rrh-rru">RRH、RRU</a></li>
+<li><a href="#前传">前传</a></li>
+<li><a href="#enodeb">eNodeB</a></li>
+<li><a href="#下行链路">下行链路</a></li>
+<li><a href="#上行链路">上行链路</a></li>
+<li><a href="#capex">CAPEX</a></li>
+<li><a href="#opex">OPEX</a></li>
+<li><a href="#bbu">BBU</a></li>
+<li><a href="#prb">PRB</a></li>
+<li><a href="#南向接口">南向接口</a></li>
+<li><a href="#北向接口">北向接口</a></li>
+<li><a href="#潮汐效应">潮汐效应</a></li>
+<li><a href="#d2d">D2D</a></li>
+<li><a href="#无线mesh网络">无线mesh网络</a></li>
+<li><a href="#csi-信道状态信息">CSI （信道状态信息）</a></li>
+</ul>
+<!-- tocstop -->
+
+<h3><span id="ran">RAN</span></h3><p>无线接入网（Radio Access Network），简称RAN。又称为居民宽带网RBB（Residential BroadBand Network）。所谓居民接入网就是在居民家中的电话、计算机或电视机与宽带主干网之间的一个中间网络，它起到接口作用，目的是使用户能够方便和经济地享用各种宽带多媒体信息。无线接入网（Radio Access Network），简称RAN 。无线接入网包括的设备有：基站（NODE B ）、无线网络控制器（RNC），主要的功能就是控制用户通过无线接入到移动通信网络中来。</p>
+<h3><span id="sla">SLA</span></h3><p>SLA：Service-Level Agreement的缩写，意思是服务等级协议。是关于网络服务供应商和客户间的一份合同，其中定义了服务类型、服务质量和客户付款等术语。</p>
+<p>典型的SLA 包括以下项目：</p>
+<ul>
+<li>分配给客户的最小带宽；</li>
+<li>客户带宽极限；</li>
+<li>能同时服务的客户数目；</li>
+<li>在可能影响用户行为的网络变化之前的通知安排；</li>
+<li>拨入访问可用性；</li>
+<li>运用统计学；</li>
+<li>服务供应商支持的最小网络利用性能，如99.9%有效工作时间或每天最多为1分钟的停机时间；</li>
+<li>各类客户的流量优先权；</li>
+<li>客户技术支持和服务；</li>
+<li>惩罚规定，为服务供应商不能满足 SLA 需求所指定。</li>
+</ul>
+<h3><span id="核心网">核心网</span></h3><p>简单点说，可以把移动网络划分为三个部分，基站子系统，网络子系统，和系统支撑部分比如说安全管理等这些。核心网部分就是位于网络子系统内，核心网的主要作用是把A口上来的呼叫请求或数据请求，接续到不同的网络上。</p>
+<p>专用网</p>
+<p>指专用于一些的保密性要求较高的部门的网络，比如企业内部专用网、军队专用网，尤其是涉及国家机密的部门。之所以称为“专用网”是因为这种网络是为本机构的主机用于机构内部的通信，而不是用于和网络外非本机构的主机通信。如果专用网不同网点之间的通信必须经过公用的因特网，但又有保密的要求，那么所有通过因特网传送的数据都必须加密。</p>
+<h3><span id="公用网">公用网</span></h3><p>一般是国家的邮电部门建造的网络.”公用”的意思就是从所有愿意按邮电部门规定交纳费用的人都可以使用。</p>
+<p>也指网络服务提供商建设，供公共用户使用的通信网络。公用网络的通信线路是共享给公共用户使用的。</p>
+<p>垂直总体结构：从垂直方向上将公用网络分为3种。即应用层、传送网和业务网。 </p>
+<ul>
+<li>应用层：提供用户信息服务的功能，建立在各类业务网的平台之上，为用户提供各类信息和娱乐服务。有：家庭购物、远程教学、会议电视、文件传送、金融服务等等。</li>
+<li>业务网：基于传送网之上，是提供各种通信业务的网络。包括：PSTN/ISDN、分组网（X.25）、数字数据网（DDN）、移动通信网（GSM/CDMA）、帧中继网（FR）、有线电视（CATV）业务网、Internet、未来B-ISDN等。</li>
+<li>传送网：分为电路层、通道层和物理层，通道层和物理层合在一起称为传送层。 </li>
+</ul>
+<p>水平总体结构：</p>
+<ul>
+<li>核心网：是传送主体骨干网络，是除了接入网和用户住地网以外的全部网络。</li>
+<li>用户接入网：是由业务节点接口和相关用户网络接口之间的一系列传送实体组成。</li>
+<li>用户住地网：是指用户终端至用户网络接口之间所包含的机线设备，由用户室内布线系统组成。 </li>
+</ul>
+<h3><span id="信令系统signalling-systems">信令系统（signalling systems）</span></h3><p>是指电信网中交换节点（交换局、网路控制点等）为用户建立接续和进行网路管理采用的一种信息交换系统。任何一种信令系统都包含全部信号的产生、传送和接收规范以及信令程序。移动通信信令在移动通信系统中，是区别于通信用的有用信号，把话音信号以外的信号统称为“信令”。</p>
+<h3><span id="c-ran">C-RAN</span></h3><p>是根据现网条件和技术进步的趋势，提出的新型无线接入网构架。C-RAN是基于集中化处理(Centralized Processing)，协作式无线电(Collaborative Radio)和实时云计算构架(Real-time Cloud Infrastructure)的绿色无线接入网构架(Clean system)。其本质是通过实现减少基站机房数量，减少能耗，采用协作化、虚拟化技术，实现资源共享和动态调度，提高频谱效率，以达到低成本，高带宽和灵活度的运营。C-RAN的总目标是为解决移动互联网快速发展给运营商所带来的多方面挑战（能耗，建设和运维成本，频谱资源），追求未来可持续的业务和利润增长。</p>
+<h3><span id="回程链路">回程链路</span></h3><p>回程链路（backhaul）是指从接入网络或者小区站点（cellsite）到交换中心的连接。交换中心连接至骨干网络，而骨干网络连接至核心网络。因而，回程链路网络是任何电信网络结构的中间层，它位于接入网络和骨干网络之间，为这两个网络提供了重要连接。举例来说，用户在网吧用Wi-Fi上网时，Wi-Fi设备必须连回ISP（InternetService Provider）端，而此链接任务便可由WiMAX担任。这项功能有助于服务提供商降低回程传输的成本。</p>
+<h3><span id="rrh-rru">RRH、RRU</span></h3><p>RRH和RRU有什么区别？RRU和RRH其实都是射频拉远单元, 只是使用的覆盖方式不一样, RRU是针对宏站的室外覆盖, RRH是针对室内分布系统的室内覆盖。</p>
+<h3><span id="前传">前传</span></h3><p>FrontHaul（前向回传）主要是从天线的BBU（Building Base band Unit：基带处理单元）到基站控制器RRU（Radio Remote Unit：射频拉远单元）或RRH（Remote Radio Head：射频拉远头）之间的连接</p>
+<h3><span id="enodeb">eNodeB</span></h3><p>Evolved Node B，即演进型Node B简称eNB，LTE中基站的名称，相比现有3G中的Node B，集成了部分RNC的功能，减少了通信时协议的层次。eNB的功能包括：RRM功能；IP头压缩及用户数据流加密；UE附着时的MME选择；寻呼信息的调度传输；广播信息的调度传输；以及设置和提供eNB的测量等。</p>
+<h3><span id="下行链路">下行链路</span></h3><p>移动通信系统中，下行链路是指信号从基站到移动台的物理信道。下行链路是由基站发射机、合路器、双工器、馈线及其他损耗、天线增益、路径损耗、建筑物损耗、人体损耗、手机接收灵敏度组成。在点到多点系统中，由集中点到分散点的传输链路。例如：在移动通信中，由基站到移动台的链路；在卫星通信中，由卫星到地球站的链路。</p>
+<h3><span id="上行链路">上行链路</span></h3><p>上行链路是针对移动台侧来说的，移动台到基站方向称之为上行。反向链路是针对基站侧来说的，移动台到基站方向称之为反向链路。因此，上行链路又称为反向链路。</p>
+<h3><span id="capex">CAPEX</span></h3><p>CAPEX，全称为Capital Expenditure，即资本性支出，一般是指资金或固定资产、无形资产、递延资产的投入。这类资产在使用过程中会持续多个计费期间，需要在使用过程中将其资本化，并分期将成本转为费用。如固定资产的折旧，无形资产和递延资产的摊销等。对电信运营商来说，网络设备、计算机、仪器等一次性支出的都属于CAPEX。</p>
+<h3><span id="opex">OPEX</span></h3><p>在电信运营商领域，被称为运营成本,计算公式为:OPEX=维护费用+营销费用+人工成本(+折旧)。运营成本主要是指当期的付现成本。CAPEX一般是指资金、固定资产的投入.对电信运营商来说,有关的网络设备、计算机、仪器等一次性支出的项目都属于CAPEX,其中网络设备占最大的部分。OPEX指的是企业的管理支出。</p>
+<h3><span id="bbu">BBU</span></h3><p>RRU（射频拉远单元）和BBU（基带处理单元）之间需要用光纤连接。一个BBU可以支持多个RRU。采用BBU+RRU多通道方案，可以很好地解决大型场馆的室内覆盖。RRH(Remote Radio Head，射频拉远头)是用于移动宽带网络基站中的新技术设备，主要效益在于提升既有讯号传输效率，并且在更容易建置的网络架构下，扩大其网络覆盖率。</p>
+<h3><span id="prb">PRB</span></h3><p>物理资源模块（Physical Resource Block，PRB），是指是频域上12个连续的载波的资源。PRB对应的是频域上12个连续的载波（在15K载波间隔的情况下是180K），时域上是一个时隙（半个子帧，0.5 ms）的资源。</p>
+<h3><span id="南向接口">南向接口</span></h3><p>管理其他厂家网管或设备的接口，即向下提供的接口。提供对其他厂家网元的管理功能，支持多种形式的接口协议，包括SNMP、TR069、SYSLOG、SOAP、SSH等接口，其中主要的是SNMP v3 和TR069（即CWMP,客户端广域网管理协议）</p>
+<h3><span id="北向接口">北向接口</span></h3><p>北向接口（Northbound Interface）是为厂家或运营商进行接入和管理网络的接口，即向上提供的接口。网络中使用接口编程开发各种应用系统管理被管理对象，管理的方法是采集和分析被管理对象在运行中产生的各种数据。在电信网和NGN网络（下一代融合网络）中管理是分层实现的，如图1所示，可以将这种网络管理分成三层：应用层、数据处理层和数据管理层。其中应用层和数据处理层之间的数据交互定义有接口，由于应用层位于数据处理层之上，因此这种接口称之为北向接口。</p>
+<h3><span id="潮汐效应">潮汐效应</span></h3><p>在通信系统中“潮汐效应”是指工作时间人们在CBD区域大量聚集，下班后又向居民区大量迁徙的现象。这种现象引发了移动通信系统中话务量的流动，使得热点区域在特定时刻出现突发大话务量，导致网络拥塞、无法接入；对于建网初期的容量规划也带来一定的困难。而在应对该类型区域内大话务量流动的同时，实现降低建网成本，提升运营核心竞争力，成为摆在运营商面前的一道棘手难题。</p>
+<h3><span id="d2d">D2D</span></h3><p>Device-to-Device，简称D2D，是计算机专业术语，指设备到设备。Device-to-Device通信是一种在系统的控制下，允许终端之间通过复用小区资源直接进行通信的新型技术，在一定程度上解决无线通信系统频谱资源匮乏的问题。D2D技术可以应用于移动蜂窝网络，以提高资源利用率和网络容量。每一个D2D通信链路占用的资源与一个蜂窝通信链路占用的相等。</p>
+<h3><span id="无线mesh网络">无线mesh网络</span></h3><p>无线mesh网络，由mesh routers（路由器）和mesh clients（客户端）组成，其中mesh routers构成骨干网络，并和有线的internet网相连接，负责为mesh clients提供多 跳的无线internet连接。无线Mesh网络（无线网状网络）也称为“多跳（multi-hop）”网络，它是一种与传统无线网络完全不同的新型无线网络技术。</p>
+<h3><span id="csi-信道状态信息">CSI （信道状态信息）</span></h3><p>许多IEEE802.11标准使用OFDM调制信号，将其通过多个正交子载波进行传送，每个子载波上传送的信号都有不同的信号强度和相位。最近，一些普通的 IEEE 802． 11n 标准的商用无线网卡( 如Intel 5300)能以 CSI 的形式提供不同子载波详细的幅度和相位信息。具体来说，利用现成的 Intel 5300 网卡以及微调过的驱动程序，可以以 CSI 的形式输出 WiFi 带宽范围内的 CFR 的一个采样版本[ 6]:H =[ H( f1) ，H( f2) ，…，H( fi) ，…，H( fN) ]T，i∈[ 1，30]。每个CSI刻画了一个子载波的幅度和相位。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+<div>
+  
+</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://michaelfu0403.github.io/2020/10/27/%20Convergence%20of%20Computing,%20Caching%20and%20Communications/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1040,20 +1218,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1111,7 +1289,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共37.6k字（Blog totally contains 37.6k letters）</span>
+  <span class="post-count">博客全站共40.9k字（Blog totally contains 40.9k letters）</span>
 </div>
 
         
